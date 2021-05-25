@@ -3,6 +3,8 @@ from typing import Any, Dict, Optional, Sequence, Tuple, Type, Union
 
 import attr
 
+__version__ = "21.1.0"
+
 
 class _Missing:
     pass

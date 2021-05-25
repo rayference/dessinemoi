@@ -1,0 +1,6 @@
+# environment.in: Environment file template
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
