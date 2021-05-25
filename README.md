@@ -8,6 +8,25 @@ The narrator of the Little Prince probably dreamt of a factory like this one...
 
 Requires Python 3.7+. Tested with Pytest, only dependency is attrs.
 
-License: MIT.
+## Example
 
-Author: Vincent Leroy.
+```python
+import attr
+import dessinemoi
+
+@dessinemoi.register
+@attr.s
+class Sheep:
+    _TYPE_ID = "mouton"
+    wool = attr.ib(default="some")
+
+merino = dessinemoi.new("mouton", kwargs={"wool": "lots"})
+```
+
+## License
+
+This library is MIT-licensed.
+
+## About
+
+*Dessine-moi* is written and maintained by Vincent Leroy.
