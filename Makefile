@@ -28,6 +28,8 @@ pip-update-in-files:
 # Lock pip dependencies (dev must be compiled first because it constrains the
 # others)
 pip-compile: pip-update-in-files
+	rm requirements/dev.txt
+	touch requirements/dev.txt
 	@for LAYER in dev main docs tests; do \
 		echo "Compiling requirements/$${LAYER}.in to requirements/$${LAYER}.txt"; \
 		pip-compile --upgrade --build-isolation --generate-hashes --allow-unsafe \
