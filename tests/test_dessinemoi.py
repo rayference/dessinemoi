@@ -102,6 +102,10 @@ def test_convert(factory):
 
     # Conversion can be restricted to a specific type
     with pytest.raises(TypeError):
+        assert factory.convert(Sheep(), allowed_cls=Lamb)
+    assert factory.convert(Lamb(), allowed_cls=Lamb) == Lamb()
+
+    with pytest.raises(TypeError):
         assert factory.convert({"type": "sheep"}, allowed_cls=Lamb)
     assert factory.convert({"type": "lamb"}, allowed_cls=Lamb) == Lamb()
 
