@@ -1,4 +1,4 @@
-from collections import MutableMapping
+from collections.abc import MutableMapping
 from typing import Any, Dict, Optional, Sequence, Tuple, Type, Union
 
 import attr
