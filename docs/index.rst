@@ -27,8 +27,6 @@ Dessine-moi
 
 *S'il vous plaît, dessine-moi un mouton.*
 
-*Dessine-moi* is a simple Python factory.
-
 Motivation
 ----------
 
