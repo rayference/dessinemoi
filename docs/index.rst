@@ -32,19 +32,24 @@ Dessine-moi
 Motivation
 ----------
 
-*To do*
+*Dessine-moi* is a simple Python implement of the factory pattern. It was born
+from the need to create dynamically object trees from nested dictionaries
+(*e.g.* a JSON document).
 
 Features
 --------
 
-- Create factory objects.
-- Register arbitrary types to your factory, possibly with aliases, with a simple
-  decorator syntax.
-- Create objects using your factory, possibly applying type filters.
-- Write custom converters to turn values into objects of a registered type.
+- Create a ``Factory`` object and register types to it.
+- Use dictionaries to create objects from the factory.
+- Create ``attrs``-compatible converters to automatically convert dictionaries
+  to instances of registered types.
+- Customise factories to your needs.
 
 Getting started
 ---------------
+
+*Dessine-moi* requires Python 3.7+ and depends on ``attrs``. It is tested with
+Pytest.
 
 Install from PyPI in your virtual environment:
 
