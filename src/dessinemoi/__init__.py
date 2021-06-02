@@ -100,7 +100,7 @@ class Factory:
 
             return inner_wrapper
 
-    def new(
+    def create(
         self,
         type_id: str,
         allowed_cls: Optional[Union[Type, Tuple[Type]]] = None,
@@ -167,7 +167,7 @@ class Factory:
                 )
 
             # Construct object
-            return self.new(type_id, kwargs=value)
+            return self.create(type_id, kwargs=value)
 
         else:
             # Check if object has allowed type
@@ -221,7 +221,7 @@ def __getattr__(name: str) -> Any:
         return {
             "registry": factory.registry,
             "register": factory.register,
-            "new": factory.new,
+            "create": factory.create,
             "convert": factory.convert,
         }[name]
     except KeyError:

@@ -48,7 +48,7 @@ def test_factory_register(factory):
     assert factory.registry["agneau"] is Lamb
 
 
-def test_factory_new(factory):
+def test_factory_create(factory):
     @factory.register
     @attr.s(frozen=True)
     class Sheep:
@@ -63,22 +63,22 @@ def test_factory_new(factory):
         name = attr.ib(default="Gorki")
 
     # We can use the factory to instantiate new objects with positional arguments only
-    assert factory.new("sheep", args=(5, "Dolly")) == Sheep(5, "Dolly")
+    assert factory.create("sheep", args=(5, "Dolly")) == Sheep(5, "Dolly")
 
     # Keyword arguments are supported as well
-    assert factory.new("ram", args=(7,)) == Ram(7, name="Gorki")
-    assert factory.new("ram", args=(7,), kwargs=dict(name="Romuald")) == Ram(
+    assert factory.create("ram", args=(7,)) == Ram(7, name="Gorki")
+    assert factory.create("ram", args=(7,), kwargs=dict(name="Romuald")) == Ram(
         7, name="Romuald"
     )
 
     # Unregistered type IDs raise
     with pytest.raises(ValueError):
-        factory.new("mouton")
+        factory.create("mouton")
 
     # We can restrict accepted types to a certain type
-    assert factory.new("ram", args=(7,), allowed_cls=Ram) == Ram(7, name="Gorki")
+    assert factory.create("ram", args=(7,), allowed_cls=Ram) == Ram(7, name="Gorki")
     with pytest.raises(TypeError):
-        factory.new("sheep", args=(5, "Dolly"), allowed_cls=Ram)
+        factory.create("sheep", args=(5, "Dolly"), allowed_cls=Ram)
 
 
 def test_convert(factory):
@@ -127,5 +127,5 @@ def test_module_api():
         _TYPE_ID = "sheep"
         wool = attr.ib(default="some")
 
-    assert dessinemoi.new("sheep") == Sheep()
+    assert dessinemoi.create("sheep") == Sheep()
     assert dessinemoi.convert({"type": "sheep"}) == Sheep()

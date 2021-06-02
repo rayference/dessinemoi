@@ -92,7 +92,7 @@ method. If constructed class's constructor expects arguments, the ``args`` and
 
 .. doctest::
 
-   >>> merino = factory.new("sheep", kwargs={"wool": "lots"})
+   >>> merino = factory.create("sheep", kwargs={"wool": "lots"})
    >>> merino
    Sheep(wool='lots')
 
@@ -101,7 +101,7 @@ here:
 
 .. doctest::
 
-   >>> factory.new("sheep", allowed_cls=Lamb)
+   >>> factory.create("sheep", allowed_cls=Lamb)
    Traceback (most recent call last):
    ...
    TypeError: 'sheep' does not reference allowed type <class '__main__.Lamb'> or any of its subtypes
@@ -114,7 +114,7 @@ Any subtype of an allowed type is allowed:
 
 .. doctest::
 
-    >>> factory.new("lamb", allowed_cls=Sheep)
+    >>> factory.create("lamb", allowed_cls=Sheep)
     Lamb(wool='some')
 
 Convert objects
