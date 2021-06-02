@@ -124,7 +124,7 @@ Publishing
 
       .. code:: bash
 
-         gh release create v$(python3 -c "import pinttr; print(pinttr.__version__)")
+         gh release create v$(python3 -c "import dessinemoi; print(dessinemoi.__version__)")
 
       Feel free to add more options to the command if relevant.
    5. [Optional] Bump the version number to the next relevant value.
