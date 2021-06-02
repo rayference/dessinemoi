@@ -30,8 +30,8 @@ Dessine-moi
 Motivation
 ----------
 
-*Dessine-moi* is a simple Python implement of the factory pattern. It was born
-from the need to create dynamically object trees from nested dictionaries
+*Dessine-moi* is a simple Python implementation of the factory pattern. It was
+born from the need to create dynamically object trees from nested dictionaries
 (*e.g.* a JSON document).
 
 Features

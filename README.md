@@ -13,7 +13,7 @@ The narrator of Antoine de Saint-Exupéry's Little Prince probably dreamt of a f
 
 ## Motivation
 
-*Dessine-moi* is a simple Python implement of the factory pattern. It was born from the need to create dynamically object trees from nested dictionaries (*e.g.* a JSON document).
+*Dessine-moi* is a simple Python implementation of the factory pattern. It was born from the need to create dynamically object trees from nested dictionaries (*e.g.* a JSON document).
 
 ## Features
 
