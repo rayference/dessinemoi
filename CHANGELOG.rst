@@ -8,7 +8,7 @@ Changelog
   Upcoming release
   ----------------
 
-21.1.0 (2021-05-25)
+21.1.0 (2021-06-02)
 -------------------
 
 Initial release.
