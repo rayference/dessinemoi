@@ -4,43 +4,27 @@
 
 The narrator of Antoine de Saint-Exupéry's Little Prince probably dreamt of a factory like this one...
 
-*Dessine-moi* is a simple Python factory. We don't have docs **yet** (coming soon!), please read the tests for usage.
+[![Documentation Status](https://img.shields.io/readthedocs/dessinemoi?style=flat-square)](https://dessinemoi.readthedocs.io)
+[![PyPI version](https://img.shields.io/pypi/v/dessinemoi?color=blue&style=flat-square)](https://pypi.org/project/dessinemoi)
+[![Conda version](https://img.shields.io/conda/v/eradiate/dessinemoi?color=blue&style=flat-square)](https://anaconda.org/eradiate/dessinemoi)
 
-Requires Python 3.7+. Tested with Pytest, only dependency is attrs.
+[![Code style: black](https://img.shields.io/badge/code%20style-black-black?style=flat-square)](https://black.readthedocs.io)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-blue?style=flat-square&labelColor=orange)](https://pycqa.github.io/isort)
 
-## Example
+## Motivation
 
-Super lazy usage (you don't even have to create a `Factory` object):
+*Dessine-moi* is a simple Python implement of the factory pattern. It was born from the need to create dynamically object trees from nested dictionaries (*e.g.* a JSON document).  
 
-```python
-import attr
-import dessinemoi
+## Features
 
-@dessinemoi.register
-@attr.s
-class Sheep:
-    _TYPE_ID = "mouton"
-    wool = attr.ib(default="some")
+- Create a `Factory` object and register types to it
+- Use dictionaries to create objects from the factory
+- Create `attrs`-compatible converters to automatically convert dictionaries to instances of registered types
+- Customise factories to your needs
 
-merino = dessinemoi.new("mouton", kwargs={"wool": "lots"})
-```
+Check the [documentation](https://dessinemoi.readthedocs.io) for more detail.
 
-This is however usable only if you are sure that none of your dependencies or no package depending on your code will use *Dessine-moi* as well: there could be name collisions otherwise. In that case, just create a `Factory` instance:
-
-```python
-import attr
-import dessinemoi
-
-factory = dessinemoi.Factory()
-
-@factory.register
-@attr.s
-class Sheep:
-    _TYPE_ID = "mouton"
-    wool = attr.ib(default="some")
-
-merino = factory.new("mouton", kwargs={"wool": "lots"})
-```
+Requires Python 3.7+, depends on `attrs`. Tested with Pytest.
 
 ## License
 
@@ -50,3 +34,8 @@ merino = factory.new("mouton", kwargs={"wool": "lots"})
 ## About
 
 *Dessine-moi* is written and maintained by [Vincent Leroy](https://github.com/leroyvn).
+
+The development is supported by [Rayference](https://www.rayference.eu).
+
+*Dessine-moi* is a component of the
+[Eradiate radiative transfer model](https://www.eradiate.eu).
