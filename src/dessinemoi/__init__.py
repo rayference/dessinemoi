@@ -3,15 +3,20 @@ from typing import Any, Dict, Optional, Sequence, Tuple, Type, Union
 
 import attr
 
+# -- Version information -------------------------------------------------------
+
 __version__ = "21.1.0"
+
+# -- Sentinel value for unset parameters ---------------------------------------
 
 
 class _Missing:
     pass
 
 
-#: Sentinel value for unset parameters
 _MISSING = _Missing
+
+# -- Core stuff ----------------------------------------------------------------
 
 
 @attr.s

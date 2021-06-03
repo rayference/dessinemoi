@@ -24,7 +24,7 @@ Dependency management (Conda)
    The appropriate Conda lock file should be selected based on the platform
    detected by the Makefile.
 
-**... lock Conda dependencies**
+**... lock dependencies**
    The conda-lock utility is used to solve dependencies using Conda and lock
    them. A convenience make target is defined to automate the process:
 
@@ -37,13 +37,6 @@ Dependency management (Conda)
    .. code-block:: bash
 
       make conda-lock-all
-
-   If you also want to lock pip dependencies, then use the ``pip-compile``
-   target:
-
-   .. code-block:: bash
-
-      make pip-compile
 
 **... update my environment based on the lock file**
    After updating locked dependencies, you can update your development environment
@@ -59,32 +52,40 @@ Dependency management (Conda)
 
       make conda-update
 
-Dependency management (Pip)
----------------------------
+Dependency management (Poetry)
+------------------------------
 
 *I want to ...*
 
 **... initialise a development environment**
-   Activate the target environment and use the ``pip-init`` make target:
+   Use `Poetry's environment initialisation command <https://python-poetry.org/docs/cli/#install>`_:
 
    .. code-block:: bash
 
-      make pip-init
+      poetry install
+
+   See Poetry docs if you want more control on the installation process.
 
 **... lock dependencies**
-   Use the ``pip-lock`` make target:
+   Use `Poetry's dependency lock command <https://python-poetry.org/docs/cli/#lock>`_:
 
    .. code-block:: bash
 
-      make pip-lock
+      poetry lock
 
 **... update my environment based on the lock file**
    After updating locked dependencies, you can update your development environment
-   using the ``pip-init`` make target:
+   using `Poetry's dependency lock command <https://python-poetry.org/docs/cli/#lock>`_:
 
    .. code-block:: bash
 
-      make pip-init
+      poetry lock
+
+   If you want to automatically add a lock file update as well:
+
+   .. code-block:: bash
+
+      poetry update
 
 Publishing
 ----------
@@ -141,7 +142,7 @@ Publishing
 
       .. code-block:: bash
 
-         make upload-pypi
+         make publish
 
       .. note:: This make target will also execute the ``dist`` target.
 
@@ -207,11 +208,8 @@ Building the documentation
 
       make docs
 
+..
+  Roadmap
+  -------
 
-Roadmap
--------
-
-**For later**
-    * Automate testing with CI (including coverage stats).
-    * Automate packaging and publish to conda-forge instead of a private channel
-      on Anaconda Cloud.
+  **Nothing planned**

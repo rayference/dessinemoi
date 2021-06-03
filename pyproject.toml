@@ -1,6 +1,52 @@
+# -- Poetry --------------------------------------------------------------------
+
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "dessinemoi"
+version = "21.1.0"
+description = "A simple Python factory system"
+authors = ["Vincent Leroy <vincent.leroy@rayference.eu>"]
+maintainers = ["Vincent Leroy <vincent.leroy@rayference.eu>"]
+readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/leroyvn/dessinemoi"
+documentation  = "https://dessinemoi.readthedocs.io"
+packages = [
+    { include = "dessinemoi", from = "src" },
+]
+
+# -- Dependencies --------------------------------------------------------------
+
+[tool.poetry.dependencies]
+python = ">=3.7,<4"
+attrs = "*"
+
+[tool.poetry.dev-dependencies]
+# test
+pytest = "^3.4"
+pytest-cov = "*"
+# dev
+black = "*"
+isort = ">5"
+conda-lock = "^0.9"
+bump2version = "*"
+# docs
+sphinx = ">=3.1"
+furo = "*"
+sphinx-copybutton = "*"
+sphinx-autodoc-typehints = "*"
+
+[tool.conda-lock]
+channels = ["conda-forge"]
+
+[tool.conda-lock.dependencies]
+setuptools = "*"  # Required to install package in dev mode
+poetry = "*"  # Required to manage dependencies
+
+# -- Formatters ----------------------------------------------------------------
 
 [tool.black]
 line-length = 88
