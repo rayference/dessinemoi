@@ -3,6 +3,41 @@
 Developer guide
 ===============
 
+Dependency management (Poetry)
+------------------------------
+
+*I want to ...*
+
+**... initialise a development environment**
+   Use `Poetry's environment initialisation command <https://python-poetry.org/docs/cli/#install>`_:
+
+   .. code-block:: bash
+
+      poetry install
+
+   See Poetry docs if you want more control on the installation process.
+
+**... lock dependencies**
+   Use `Poetry's dependency lock command <https://python-poetry.org/docs/cli/#lock>`_:
+
+   .. code-block:: bash
+
+      poetry lock
+
+**... update my environment based on the lock file**
+   After updating locked dependencies, you can update your development environment
+   using `Poetry's dependency lock command <https://python-poetry.org/docs/cli/#lock>`_:
+
+   .. code-block:: bash
+
+      poetry lock
+
+   If you want to automatically add a lock file update as well:
+
+   .. code-block:: bash
+
+      poetry update
+
 Dependency management (Conda)
 -----------------------------
 
@@ -52,40 +87,17 @@ Dependency management (Conda)
 
       make conda-update
 
-Dependency management (Poetry)
-------------------------------
+Dependency management (Poetry + Conda)
+--------------------------------------
 
 *I want to ...*
 
-**... initialise a development environment**
-   Use `Poetry's environment initialisation command <https://python-poetry.org/docs/cli/#install>`_:
+**... quickly update all dependency lock files**
+   Use the ``lock`` make target:
 
    .. code-block:: bash
 
-      poetry install
-
-   See Poetry docs if you want more control on the installation process.
-
-**... lock dependencies**
-   Use `Poetry's dependency lock command <https://python-poetry.org/docs/cli/#lock>`_:
-
-   .. code-block:: bash
-
-      poetry lock
-
-**... update my environment based on the lock file**
-   After updating locked dependencies, you can update your development environment
-   using `Poetry's dependency lock command <https://python-poetry.org/docs/cli/#lock>`_:
-
-   .. code-block:: bash
-
-      poetry lock
-
-   If you want to automatically add a lock file update as well:
-
-   .. code-block:: bash
-
-      poetry update
+      make lock
 
 Publishing
 ----------
