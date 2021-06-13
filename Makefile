@@ -32,7 +32,11 @@ conda-init:
 	conda update --file requirements/environment-$(PLATFORM).lock
 	python setup.py develop --no-deps
 
-conda-update: conda-lock-all conda-init
+# Shortcut for poetry and conda lock
+lock: conda-lock-all
+	poetry lock
+
+conda-update: conda-lock-all conda-init lock
 
 .PHONY: conda-lock conda-lock-all conda-init conda-update
 
@@ -59,6 +63,6 @@ dist-clean:
 	rm -rf dist
 
 publish: build
-	poetry publish --dry-run
+	poetry publish
 
 .PHONY: build dist-clean publish
