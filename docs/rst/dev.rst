@@ -24,6 +24,13 @@ Dependency management (Poetry)
 
       poetry lock
 
+   .. note:: When updating dependencies, both Conda and Poetry lock files should
+      be updated. The ``lock`` make target serves that purpose:
+
+      .. code-block:: bash
+
+         make lock
+
 **... update my environment based on the lock file**
    After updating locked dependencies, you can update your development environment
    using `Poetry's dependency lock command <https://python-poetry.org/docs/cli/#lock>`_:
@@ -73,6 +80,13 @@ Dependency management (Conda)
 
       make conda-lock-all
 
+   .. note:: When updating dependencies, both Conda and Poetry lock files should
+      be updated. The ``lock`` make target serves that purpose:
+
+      .. code-block:: bash
+
+         make lock
+
 **... update my environment based on the lock file**
    After updating locked dependencies, you can update your development environment
    using one of the generate lock files:
@@ -86,18 +100,6 @@ Dependency management (Conda)
    .. code-block:: bash
 
       make conda-update
-
-Dependency management (Poetry + Conda)
---------------------------------------
-
-*I want to ...*
-
-**... quickly update all dependency lock files**
-   Use the ``lock`` make target:
-
-   .. code-block:: bash
-
-      make lock
 
 Publishing
 ----------
