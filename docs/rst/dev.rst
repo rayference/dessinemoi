@@ -3,6 +3,31 @@
 Developer guide
 ===============
 
+Changelog management
+--------------------
+
+We use `Towncrier <https://github.com/twisted/towncrier>`_ to automate changelog
+management. This utility collects news fragments versioned in the ``changes``
+directory and generates a changelog entry from them, then updates
+``CHANGELOG.rst``. News fragments are consumed and automatically removed from
+versioning when used to create a changelog entry.
+
+News fragment format:
+
+* The filename should be ``<issue_or_hash>.<category>``.
+* Supported categories are:
+  * feature;
+  * bugfix;
+  * removal;
+  * dev.
+* File content should contain a brief description of the changes made.
+
+To update the changelog during release preparation, just call
+
+.. code-block:: bash
+
+   towncrier build
+
 Dependency management (Poetry)
 ------------------------------
 
