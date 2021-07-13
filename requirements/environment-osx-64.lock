@@ -1,5 +1,5 @@
 # platform: osx-64
-# env_hash: 946fa0f7403852e5a0a3b874afa99948855882f763ab5b5540a66a01cd662244
+# env_hash: 56c9f295e2afdcf4c61fff89b61478d6c5a598a0d319c5563f18df6361ba358d
 @EXPLICIT
 https://conda.anaconda.org/conda-forge/osx-64/ca-certificates-2021.5.30-h033912b_0.tar.bz2#2377a0c58b5ffe92d70b7bdcd833e8ff
 https://conda.anaconda.org/conda-forge/osx-64/libcxx-12.0.1-habf9029_0.tar.bz2#49c188a7f9c7c9ddabafc80cc5625bb7
@@ -26,6 +26,7 @@ https://conda.anaconda.org/conda-forge/noarch/distlib-0.3.2-pyhd8ed1ab_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/filelock-3.0.12-pyh9f0ad1d_0.tar.bz2#7544ed05bbbe9bb687bc9bcbe4d6cb46
 https://conda.anaconda.org/conda-forge/noarch/idna-2.10-pyh9f0ad1d_0.tar.bz2#f95a12b4f435aae6680fe55ae2eb1b06
 https://conda.anaconda.org/conda-forge/noarch/imagesize-1.2.0-py_0.tar.bz2#5879bd2c4b399a5072468e5fe587bf1b
+https://conda.anaconda.org/conda-forge/noarch/incremental-21.3.0-pyhd8ed1ab_0.tar.bz2#14fd665582bf1c52eeeb629ad9cfe99e
 https://conda.anaconda.org/conda-forge/noarch/lockfile-0.12.2-py_1.tar.bz2#c104d98e09c47519950cffb8dd5b4f10
 https://conda.anaconda.org/conda-forge/noarch/more-itertools-8.8.0-pyhd8ed1ab_0.tar.bz2#af8d3837f18d331839368bcb9f8cd3d9
 https://conda.anaconda.org/conda-forge/noarch/pastel-0.2.0-py_0.tar.bz2#3872ffc75ab52f883e0ffa8fcf1679d8
@@ -93,6 +94,7 @@ https://conda.anaconda.org/conda-forge/noarch/poetry-core-1.0.3-pyhd8ed1ab_0.tar
 https://conda.anaconda.org/conda-forge/noarch/pygments-2.9.0-pyhd8ed1ab_0.tar.bz2#a2d9bba43c9b80a42b0ccb9afd7223c2
 https://conda.anaconda.org/conda-forge/noarch/pyopenssl-20.0.1-pyhd8ed1ab_0.tar.bz2#92371c25994d0f5d28a01c1fb75ebf86
 https://conda.anaconda.org/conda-forge/osx-64/pytest-3.10.1-py37_1000.tar.bz2#ae1dcc55b4d375a26d90f61976daef02
+https://conda.anaconda.org/conda-forge/noarch/towncrier-21.3.0-pyhd8ed1ab_0.tar.bz2#5bb5580558f5b4b8c0f46c0eb03da7f0
 https://conda.anaconda.org/conda-forge/noarch/urllib3-1.26.6-pyhd8ed1ab_0.tar.bz2#dea5b6d93cfbfbc2a253168ad05b3f89
 https://conda.anaconda.org/conda-forge/noarch/pytest-cov-2.9.0-pyh9f0ad1d_0.tar.bz2#d88a8c752cb7f3e65b123450f2372ff5
 https://conda.anaconda.org/conda-forge/noarch/requests-2.25.1-pyhd3deb0d_0.tar.bz2#ae687aba31a1c400192a86a2e993ffdc
