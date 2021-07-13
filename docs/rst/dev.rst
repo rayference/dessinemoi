@@ -157,6 +157,14 @@ Publishing
 
    .. note:: The ``--new-version`` option overrides the target version value.
 
+**... update the changelog**
+  Let Towncrier do the job (don't hesitate to use the ``--draft`` flag if
+  unsure):
+
+  .. code-block:: bash
+
+     towncrier build
+
 **... create a release on GitHub**
    1. Make sure that the `GitHub CLI <https://cli.github.com/>`_ is installed on
       your machine.
