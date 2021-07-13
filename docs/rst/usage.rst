@@ -117,6 +117,31 @@ Any subtype of an allowed type is allowed:
     >>> factory.create("lamb", allowed_cls=Sheep)
     Lamb(wool='some')
 
+.. note::
+
+   A very common and Pythonic design pattern consists in defining special
+   constructors using class methods. If you use this approach, *Dessine-moi*
+   lets you select a constructor using the ``construct`` argument. For
+   demonstrative purposes, let us attach a class method constructor to our
+   ``Sheep`` class:
+
+   .. doctest::
+
+      >>> @classmethod
+      ... def unsheavable(cls):
+      ...     return cls(wool="none")
+      >>> Sheep.unsheavable = unsheavable
+
+   We can now route object creation to this function using the ``construct``
+   keyword argument. Since the ``unsheavable()`` class method takes no argument,
+   we do not pass the ``args`` and ``kwargs`` arguments:
+
+   .. doctest::
+
+      >>> factory.create("sheep", construct="unsheavable")
+      Sheep(wool='none')
+
+
 Convert objects
 ^^^^^^^^^^^^^^^
 

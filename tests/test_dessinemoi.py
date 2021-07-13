@@ -10,7 +10,7 @@ def factory():
     yield Factory()
 
 
-def test_factory_create(factory):
+def test_factory_instantiate(factory):
     # A Factory instance can be created
     assert isinstance(factory, Factory)
 
@@ -79,6 +79,23 @@ def test_factory_create(factory):
     assert factory.create("ram", args=(7,), allowed_cls=Ram) == Ram(7, name="Gorki")
     with pytest.raises(TypeError):
         factory.create("sheep", args=(5, "Dolly"), allowed_cls=Ram)
+
+
+def test_factory_classmethod(factory):
+    @factory.register
+    @attr.s(frozen=True)
+    class Sheep:
+        _TYPE_ID = "sheep"
+        age = attr.ib()
+        name = attr.ib()
+
+        @classmethod
+        def old(cls, name):
+            return cls(15, name)
+
+    # The construct parameter allows for the selection of a class method constructor
+    s = factory.create("sheep", construct="old", kwargs={"name": "Romuald"})
+    assert s.age == 15
 
 
 def test_convert(factory):

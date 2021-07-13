@@ -109,6 +109,7 @@ class Factory:
         self,
         type_id: str,
         allowed_cls: Optional[Union[Type, Tuple[Type]]] = None,
+        construct: Optional[str] = None,
         args: Optional[Sequence] = None,
         kwargs: Optional[MutableMapping] = None,
     ) -> Any:
@@ -122,6 +123,10 @@ class Factory:
             If not ``None``, one or several types to which creation shall be
             restricted. If ``type_id`` does not reference one of these allowed
             types, an exception will be raised.
+
+        :param construct:
+            If not ``None``, attempt instantiation using a class method
+            constructor instead of the default constructor.
 
         :param args:
             A sequence of arguments to pass to the constructor of the created
@@ -153,7 +158,10 @@ class Factory:
         if kwargs is None:
             kwargs = dict()
 
-        return cls(*args, **kwargs)
+        if construct is not None:
+            return getattr(cls, construct)(*args, **kwargs)
+        else:
+            return cls(*args, **kwargs)
 
     def _convert_impl(
         self,
