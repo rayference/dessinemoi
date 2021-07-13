@@ -10,14 +10,20 @@ Dessine-moi
 
 *Dessine-moi* v\ |release|.
 
-.. image:: https://img.shields.io/readthedocs/dessinemoi?style=flat-square
-   :target: https://dessinemoi.readthedocs.io
-
 .. image:: https://img.shields.io/pypi/v/dessinemoi?color=blue&style=flat-square
    :target: https://pypi.org/project/dessinemoi
 
 .. image:: https://img.shields.io/conda/v/eradiate/dessinemoi?color=blue&style=flat-square
    :target: https://anaconda.org/eradiate/dessinemoi
+
+.. image:: https://img.shields.io/github/workflow/status/leroyvn/dessinemoi/Tests/main?style=flat-square
+   :target: https://github.com/leroyvn/dessinemoi/actions/workflows/tests.yml
+
+.. image:: https://codecov.io/gh/leroyvn/dessinemoi/branch/main/graph/badge.svg?style=flat-square
+   :target: https://codecov.io/gh/leroyvn/dessinemoi
+
+.. image:: https://img.shields.io/readthedocs/dessinemoi?style=flat-square
+   :target: https://dessinemoi.readthedocs.io
 
 .. image:: https://img.shields.io/badge/code%20style-black-black?style=flat-square
    :target: https://github.com/psf/black
