@@ -28,6 +28,7 @@ attrs = "*"
 # test
 pytest = "^3.4"
 pytest-cov = "*"
+codecov = "*"
 # dev
 black = "*"
 isort = ">5"
@@ -45,6 +46,18 @@ channels = ["conda-forge"]
 [tool.conda-lock.dependencies]
 setuptools = "*"  # Required to install package in dev mode
 poetry = "*"  # Required to manage dependencies
+
+# -- Coverage ------------------------------------------------------------------
+
+[tool.coverage.paths]
+source = ["src", "*/site-packages"]
+
+[tool.coverage.run]
+branch = true
+source = ["dessinemoi"]
+
+[tool.coverage.report]
+show_missing = true
 
 # -- Formatters ----------------------------------------------------------------
 

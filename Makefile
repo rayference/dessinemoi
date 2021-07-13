@@ -50,7 +50,7 @@ conda-update: conda-lock-all conda-init lock
 # -- Testing -------------------------------------------------------------------
 
 test:
-	pytest --cov=src --doctest-glob="*.rst" docs tests
+	pytest --cov --doctest-glob="*.rst" docs tests
 
 .PHONY: test
 
@@ -58,6 +58,7 @@ test:
 
 docs:
 	make -C docs html
+	@echo "Access documentation at docs/_build/html/index.html"
 
 .PHONY: docs
 
