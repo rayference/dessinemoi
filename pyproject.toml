@@ -6,7 +6,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "dessinemoi"
-version = "21.2.0"
+version = "21.3.0-dev0"
 description = "A simple Python factory system"
 authors = ["Vincent Leroy <vincent.leroy@rayference.eu>"]
 maintainers = ["Vincent Leroy <vincent.leroy@rayference.eu>"]
@@ -39,7 +39,7 @@ sphinx = ">=3.1"
 furo = "*"
 sphinx-copybutton = "*"
 sphinx-autodoc-typehints = "*"
-towncrier = "^21.3.0"
+towncrier = "^21.3.0-dev0"
 
 [tool.conda-lock]
 channels = ["conda-forge"]
