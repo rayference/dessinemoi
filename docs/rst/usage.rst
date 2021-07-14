@@ -75,7 +75,7 @@ bypassed with dedicated keyword arguments:
 
   .. doctest::
 
-     >>> factory.register(Sheep, "mouton", allow_aliases=True)
+     >>> factory.register(Sheep, type_id="mouton", allow_aliases=True)
      <class '__main__.Sheep'>
      >>> factory
      Factory(registry={'sheep': FactoryRegistryEntry(cls=<class '__main__.Sheep'>, dict_constructor=None), 'lamb': FactoryRegistryEntry(cls=<class '__main__.Lamb'>, dict_constructor=None), 'mouton': FactoryRegistryEntry(cls=<class '__main__.Sheep'>, dict_constructor=None)})

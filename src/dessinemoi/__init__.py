@@ -74,6 +74,7 @@ class Factory:
     def register(
         self,
         cls: Any = _MISSING,
+        *,
         type_id: Optional[str] = None,
         dict_constructor: Optional[str] = None,
         allow_aliases: bool = False,
@@ -83,6 +84,8 @@ class Factory:
         If parameter ``cls`` is passed, register ``cls`` to the factory.
         Otherwise, *i.e.* if this method is used as a decorator, register the
         decorated class to the factory.
+
+        .. note:: All arguments, except ``cls``, are keyword-only.
 
         :param cls:
             If set, type to register to the factory. If unset, this function
@@ -233,10 +236,14 @@ class Factory:
     def convert(
         self,
         value: MutableMapping = _MISSING,
+        *,
         allowed_cls: Optional[Union[Type, Tuple[Type]]] = None,
     ) -> Any:
         """
         Convert a dictionary to one of the types supported by the factory.
+
+        .. note:: All arguments, except ``self`` and ``value``, are
+           keyword-only.
 
         :param value:
             Value to attempt conversion of. If ``value`` is a dictionary, the
