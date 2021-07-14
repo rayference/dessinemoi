@@ -22,13 +22,17 @@ def test_factory_register(factory):
     # Register class based on its built-in ID
     factory.register(Sheep)
     assert "sheep" in factory.registry
-    assert factory.registry["sheep"] == Sheep
+    assert factory.registry["sheep"] == dessinemoi.FactoryRegistryEntry(
+        cls=Sheep, dict_constructor=None
+    )
 
     # Registering class again fails if aliases are not allowed
     with pytest.raises(ValueError):
         factory.register(Sheep, type_id="mouton")
     factory.register(Sheep, type_id="mouton", allow_aliases=True)
-    assert factory.registry["mouton"] == Sheep
+    assert factory.registry["mouton"] == dessinemoi.FactoryRegistryEntry(
+        cls=Sheep, dict_constructor=None
+    )
 
     # Overwriting existing ID fails if not explicitly allowed
     with pytest.raises(ValueError):
@@ -44,8 +48,8 @@ def test_factory_register(factory):
 
     assert "lamb" in factory.registry
     assert "agneau" in factory.registry
-    assert factory.registry["lamb"] is Lamb
-    assert factory.registry["agneau"] is Lamb
+    assert factory.registry["lamb"].cls is Lamb
+    assert factory.registry["agneau"].cls is Lamb
 
 
 def test_factory_create(factory):
@@ -146,3 +150,25 @@ def test_module_api():
 
     assert dessinemoi.create("sheep") == Sheep()
     assert dessinemoi.convert({"type": "sheep"}) == Sheep()
+
+
+def test_factory_dict_constructor(factory):
+    @attr.s
+    class Sheep:
+        wool = attr.ib()
+
+        @classmethod
+        def merino(cls):
+            return cls(wool="lots")
+
+    # A non-existing dict constructor will raise
+    with pytest.raises(ValueError):
+        factory.register(Sheep, type_id="sheep", dict_constructor="foo")
+
+    # The dict constructor is correctly registered
+    factory.register(Sheep, type_id="sheep", dict_constructor="merino")
+
+    # The registered constructor is called as expected upon dict conversion
+    assert factory.registry["sheep"].dict_constructor == "merino"
+    s = factory.convert({"type": "sheep"})
+    assert s == Sheep(wool="lots")

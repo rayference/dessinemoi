@@ -45,7 +45,7 @@ We can now register this class to the factory using the
    >>> factory.register(Sheep, type_id="sheep")
    <class '__main__.Sheep'>
    >>> factory
-   Factory(registry={'sheep': <class '__main__.Sheep'>})
+   Factory(registry={'sheep': FactoryRegistryEntry(cls=<class '__main__.Sheep'>, dict_constructor=None)})
 
 Classes can also be registered upon declaration using :meth:`~.Factory.register`
 as a decorator. In that case, the ``cls`` positional argument is omitted. If the
@@ -59,7 +59,7 @@ class attribute to set the class's ID in the registry:
    ... class Lamb(Sheep):
    ...     _TYPE_ID = "lamb"
    >>> factory
-   Factory(registry={'sheep': <class '__main__.Sheep'>, 'lamb': <class '__main__.Lamb'>})
+   Factory(registry={'sheep': FactoryRegistryEntry(cls=<class '__main__.Sheep'>, dict_constructor=None), 'lamb': FactoryRegistryEntry(cls=<class '__main__.Lamb'>, dict_constructor=None)})
 
 .. note:: As can be seen from the previous code snippet, the call operator ``()``
    can be omitted if all arguments are omitted.
@@ -67,8 +67,8 @@ class attribute to set the class's ID in the registry:
 .. note:: When used as a decorator, :meth:`~.Factory.register` is best used
    last (*i.e.* at the top of the sequence).
 
-The :meth:`~.Factory.register` method implements safeguards which can bypassed
-with dedicated keyword arguments:
+The :meth:`~.Factory.register` method implements safeguards which can be
+bypassed with dedicated keyword arguments:
 
 * if ``allow_aliases`` is ``True``, a type can be registered multiple times with
   different IDs (the default value is ``False``):
@@ -78,10 +78,14 @@ with dedicated keyword arguments:
      >>> factory.register(Sheep, "mouton", allow_aliases=True)
      <class '__main__.Sheep'>
      >>> factory
-     Factory(registry={'sheep': <class '__main__.Sheep'>, 'lamb': <class '__main__.Lamb'>, 'mouton': <class '__main__.Sheep'>})
+     Factory(registry={'sheep': FactoryRegistryEntry(cls=<class '__main__.Sheep'>, dict_constructor=None), 'lamb': FactoryRegistryEntry(cls=<class '__main__.Lamb'>, dict_constructor=None), 'mouton': FactoryRegistryEntry(cls=<class '__main__.Sheep'>, dict_constructor=None)})
 
 * if ``allow_id_overwrite`` is ``True``, registering a type with an existing ID
   will succeed and overwrite the existing entry (the default value is ``False``).
+
+Finally, :meth:`~.Factory.register` features an optional ``dict_constructor``
+argument which, when set, associates a class method constructor to be called
+upon attempting dictionary conversion. See `Convert objects`_ for more detail.
 
 Instantiate registered types
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -159,15 +163,30 @@ Convert objects
      >>> factory.convert({"type": "sheep", "wool": "lots"})
      Sheep(wool='lots')
 
-.. note:: :meth:`~.Factory.convert` takes a ``allowed_cls`` argument and uses it
-   exactly as :meth:`~.Factory.new` does.
+.. admonition:: Notes
+   :class: note
+
+   * :meth:`~.Factory.convert` takes a ``allowed_cls`` argument and uses it
+     exactly as :meth:`~.Factory.new` does.
+   * Dictionary conversion won't work with classes expected non kw-only fields.
+   * If a ``dict_constructor`` is associated to the registered type, it will be
+     used to create the object instead of the default constructor.
+
+     .. doctest::
+
+        >>> factory.registry.clear()
+        >>> factory.register(Sheep, type_id="sheep", dict_constructor="unsheavable")
+        <class '__main__.Sheep'>
+        >>> factory.convert({"type": "sheep"})
+        Sheep(wool='none')
 
 Extend factories
 ^^^^^^^^^^^^^^^^
 
-Arguably, :meth:`~.Factory.convert` is rather limited: it works only for
-classes whose constructors only take keyword arguments and reserves the ``type``
-entry for factory ID specification. One could wish to change some of that.
+Arguably, :meth:`~.Factory.convert` is rather limited. For instance, it works
+only for classes whose constructors only take keyword arguments and reserves the
+``type`` entry for factory ID specification. One could wish to change some of
+that.
 
 Fortunately, implementing custom conversion methods is simple: subclass
-:class:`.Factory` and redefine :meth:`~.Factory.convert`!
+:class:`.Factory` and reimplement its :meth:`~.Factory.convert` method!

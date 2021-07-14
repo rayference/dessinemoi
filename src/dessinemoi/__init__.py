@@ -1,5 +1,6 @@
 from collections.abc import MutableMapping
-from typing import Any, Dict, Optional, Sequence, Tuple, Type, Union
+from copy import copy
+from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Type, Union
 
 import attr
 
@@ -19,22 +20,36 @@ _MISSING = _Missing
 # -- Core stuff ----------------------------------------------------------------
 
 
-@attr.s
+@attr.s(frozen=True, slots=True)
+class FactoryRegistryEntry:
+    cls: Type = attr.ib()
+    dict_constructor: Optional[str] = attr.ib()
+
+
+@attr.s(slots=True)
 class Factory:
     #: Dictionary holding the factory registry
-    registry: Dict[str, Type] = attr.ib(factory=dict)
+    registry: Dict[str, FactoryRegistryEntry] = attr.ib(factory=dict)
+
+    @property
+    def registered_types(self) -> List[Type]:
+        """
+        List of currently registered types, without duplicates.
+        """
+        return list({x.cls for x in self.registry.values()})
 
     def _register_impl(
         self,
         cls: Type,
         type_id: Optional[str] = None,
+        dict_constructor: Optional[str] = None,
         allow_aliases: bool = False,
         allow_id_overwrite: bool = False,
     ) -> Any:
         if type_id is None:
             type_id = cls._TYPE_ID
 
-        if not allow_aliases and cls in self.registry.values():
+        if not allow_aliases and cls in self.registered_types:
             raise ValueError(f"{cls} already registered")
 
         if not allow_id_overwrite and type_id in self.registry.keys():
@@ -42,12 +57,25 @@ class Factory:
                 f"'{type_id}' already used to reference {self.registry[type_id]}"
             )
 
-        self.registry[type_id] = cls
+        # Check that dict constructor exists
+        if dict_constructor is not None:
+            try:
+                getattr(cls, dict_constructor)
+            except AttributeError as e:
+                raise ValueError(
+                    f"class method '{cls.__name__}.{dict_constructor}()' does not exist"
+                ) from e
+
+        self.registry[type_id] = FactoryRegistryEntry(
+            cls=cls,
+            dict_constructor=dict_constructor,
+        )
 
     def register(
         self,
         cls: Any = _MISSING,
         type_id: Optional[str] = None,
+        dict_constructor: Optional[str] = None,
         allow_aliases: bool = False,
         allow_id_overwrite: bool = False,
     ) -> Any:
@@ -64,6 +92,10 @@ class Factory:
 
         :param type_id:
             Identifier string used to register ``cls``.
+
+        :param dict_constructor:
+            Class method to be used for dictionary-based construction. If
+            ``None``, the default constructor is used.
 
         :param allow_aliases:
             If ``True``, a given type can be registered multiple times under
@@ -85,6 +117,7 @@ class Factory:
                 self._register_impl(
                     cls,
                     type_id=type_id,
+                    dict_constructor=dict_constructor,
                     allow_aliases=allow_aliases,
                     allow_id_overwrite=allow_id_overwrite,
                 )
@@ -98,6 +131,7 @@ class Factory:
                 self._register_impl(
                     wrapped_cls,
                     type_id=type_id,
+                    dict_constructor=dict_constructor,
                     allow_aliases=allow_aliases,
                     allow_id_overwrite=allow_id_overwrite,
                 )
@@ -143,7 +177,8 @@ class Factory:
             If the requested type is not allowed.
         """
         try:
-            cls = self.registry[type_id]
+            entry = self.registry[type_id]
+            cls = entry.cls
         except KeyError as e:
             raise ValueError(f"no type registered as '{type_id}'") from e
 
@@ -169,18 +204,23 @@ class Factory:
         allowed_cls: Optional[Union[Type, Tuple[Type]]] = None,
     ) -> Any:
         if isinstance(value, MutableMapping):
-            # Fetch class from registry
-            type_id = value.pop("type")
-            cls = self.registry[type_id]
+            # Copy value to avoid unintended mutation
+            value_copy = copy(value)
+
+            # Query registry
+            type_id = value_copy.pop("type")
+            entry = self.registry[type_id]
 
             # Check if class is allowed
-            if allowed_cls is not None and not issubclass(cls, allowed_cls):
+            if allowed_cls is not None and not issubclass(entry.cls, allowed_cls):
                 raise TypeError(
-                    f"conversion to object type '{type_id}' ({cls}) is not allowed"
+                    f"conversion to object type '{type_id}' ({entry.cls}) is not allowed"
                 )
 
             # Construct object
-            return self.create(type_id, kwargs=value)
+            return self.create(
+                type_id, construct=entry.dict_constructor, kwargs=value_copy
+            )
 
         else:
             # Check if object has allowed type
