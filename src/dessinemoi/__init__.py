@@ -6,7 +6,7 @@ import attr
 
 # -- Version information -------------------------------------------------------
 
-__version__ = "21.3.0-dev0"
+__version__ = "21.3.0"
 
 # -- Sentinel value for unset parameters ---------------------------------------
 
