@@ -39,7 +39,7 @@ sphinx = ">=3.1"
 furo = "*"
 sphinx-copybutton = "*"
 sphinx-autodoc-typehints = "*"
-towncrier = "^21.4.0-dev0"
+towncrier = "^21.3.0"
 
 [tool.conda-lock]
 channels = ["conda-forge"]

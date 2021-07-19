@@ -1,5 +1,5 @@
 # platform: win-64
-# env_hash: 5a884fba63b074b532dde54e7de30e1be949e45e1db4acb4f3b4294ecea86664
+# env_hash: 07247d4d07f9bf9a8c25d30300355238eb3f038c46ff22bd1ee69df72f530d2e
 @EXPLICIT
 https://conda.anaconda.org/conda-forge/win-64/ca-certificates-2021.5.30-h5b45459_0.tar.bz2#cfb6380d41af681ad323403f02755a15
 https://conda.anaconda.org/conda-forge/win-64/ucrt-10.0.20348.0-h57928b3_0.tar.bz2#6d666b6ea8251231ff508062d1e41f9c
