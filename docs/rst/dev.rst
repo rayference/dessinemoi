@@ -257,8 +257,11 @@ Building the documentation
 
       make docs
 
-..
-  Roadmap
-  -------
+Roadmap
+-------
 
-  **Nothing planned**
+v21.4.0
+
+* Customise parameter names currently assigned to ``type`` and ``construct``.
+* Introduce a more formal dictionary pre-processing pipeline which would allow
+  to customise conversion without subclassing :class:`.Factory`.
