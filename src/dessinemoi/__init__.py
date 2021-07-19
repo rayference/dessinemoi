@@ -22,13 +22,25 @@ _MISSING = _Missing
 
 @attr.s(frozen=True, slots=True)
 class FactoryRegistryEntry:
+    """
+    Data class holding a ``(cls: Type, dict_constructor: Optional[str])`` pair.
+
+    * ``cls`` is a type registered to a factory;
+    * ``dict_constructor`` is a string pointing to the class method constructor
+      used by default when :meth:`Factory.convert` attempts dictionary
+      conversion.
+
+    If ``dict_constructor`` is set to ``None``, it means that the default
+    constructor should be used.
+    """
+
     cls: Type = attr.ib()
     dict_constructor: Optional[str] = attr.ib()
 
 
 @attr.s(slots=True)
 class Factory:
-    #: Dictionary holding the factory registry
+    #: Dictionary holding the factory registry.
     registry: Dict[str, FactoryRegistryEntry] = attr.ib(factory=dict)
 
     @property
