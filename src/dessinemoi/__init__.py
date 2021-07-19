@@ -33,7 +33,7 @@ class FactoryRegistryEntry:
     If ``dict_constructor`` is set to ``None``, it means that the default
     constructor should be used.
 
-    .. versionadded:: 21.4.0-dev0
+    .. versionadded:: 21.3.0
     """
 
     cls: Type = attr.ib()
@@ -46,7 +46,7 @@ class Factory:
     """
     Dictionary holding the factory registry.
     
-    .. versionchanged:: 21.4.0-dev0
+    .. versionchanged:: 21.3.0
        Changed type from ``Dict[str, Type]`` to 
        ``Dict[str, FactoryRegistryEntry]``.
     """
@@ -56,7 +56,7 @@ class Factory:
         """
         List of currently registered types, without duplicates.
 
-        .. versionadded:: 21.4.0-dev0
+        .. versionadded:: 21.3.0
         """
         return list({x.cls for x in self.registry.values()})
 
@@ -136,10 +136,10 @@ class Factory:
             If ``allow_id_overwrite`` is ``False`` and ``type_id`` is already
             used to reference a type in the registry.
 
-        .. versionchanged:: 21.4.0-dev0
+        .. versionchanged:: 21.3.0
            Made keyword-only.
 
-        .. versionchanged:: 21.4.0-dev0
+        .. versionchanged:: 21.3.0
            Added ``dict_constructor`` argument.
         """
 
@@ -295,7 +295,7 @@ class Factory:
             If ``allowed_cls`` is specified and ``value.type`` refers to a
             disallowed type or ``type(value)`` is disallowed.
 
-        .. versionchanged:: 21.4.0-dev0
+        .. versionchanged:: 21.3.0
            Made all args keyword-only except for ``value``.
         """
         if value is _MISSING:
