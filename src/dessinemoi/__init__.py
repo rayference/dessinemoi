@@ -207,7 +207,7 @@ class Factory:
         :raises TypeError:
             If the requested type is not allowed.
 
-        .. versionchanged:: 21.3.0
+        .. versionchanged:: 21.2.0
            Added ``construct`` keyword argument.
         """
         try:
