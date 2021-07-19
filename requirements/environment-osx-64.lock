@@ -1,5 +1,5 @@
 # platform: osx-64
-# env_hash: 56c9f295e2afdcf4c61fff89b61478d6c5a598a0d319c5563f18df6361ba358d
+# env_hash: f5254f3a93c2c964aeb7dd0c6fcdf1cdbd32389e5f850c4d538c2ec10498f2d4
 @EXPLICIT
 https://conda.anaconda.org/conda-forge/osx-64/ca-certificates-2021.5.30-h033912b_0.tar.bz2#2377a0c58b5ffe92d70b7bdcd833e8ff
 https://conda.anaconda.org/conda-forge/osx-64/libcxx-12.0.1-habf9029_0.tar.bz2#49c188a7f9c7c9ddabafc80cc5625bb7
@@ -19,18 +19,19 @@ https://conda.anaconda.org/conda-forge/noarch/atomicwrites-1.4.0-pyh9f0ad1d_0.ta
 https://conda.anaconda.org/conda-forge/noarch/attrs-21.2.0-pyhd8ed1ab_0.tar.bz2#d2e1c7f388ac403df7079b411c37cc50
 https://conda.anaconda.org/conda-forge/noarch/bump2version-1.0.1-pyh9f0ad1d_0.tar.bz2#1b3fd56f54baa99e3c9967caf279f66f
 https://conda.anaconda.org/conda-forge/noarch/cachy-0.3.0-py_0.tar.bz2#808c46dc56ae4a796830129aaf1b51ec
+https://conda.anaconda.org/conda-forge/noarch/charset-normalizer-2.0.0-pyhd8ed1ab_0.tar.bz2#4a57e24d5b759893615c05926b7b5fb9
 https://conda.anaconda.org/conda-forge/noarch/colorama-0.4.4-pyh9f0ad1d_0.tar.bz2#c08b4c1326b880ed44f3ffb04803332f
 https://conda.anaconda.org/conda-forge/noarch/crashtest-0.3.0-py_0.tar.bz2#156649e34f14a76113312d5bcab3dd6c
 https://conda.anaconda.org/conda-forge/noarch/dataclasses-0.8-pyhc8e2a94_1.tar.bz2#28e0de0ecba81334619a777fdc00febc
 https://conda.anaconda.org/conda-forge/noarch/distlib-0.3.2-pyhd8ed1ab_0.tar.bz2#ae8b866c376568b0342ae2c9b68f1e65
 https://conda.anaconda.org/conda-forge/noarch/filelock-3.0.12-pyh9f0ad1d_0.tar.bz2#7544ed05bbbe9bb687bc9bcbe4d6cb46
-https://conda.anaconda.org/conda-forge/noarch/idna-2.10-pyh9f0ad1d_0.tar.bz2#f95a12b4f435aae6680fe55ae2eb1b06
+https://conda.anaconda.org/conda-forge/noarch/idna-3.1-pyhd3deb0d_0.tar.bz2#9c9aea4b8391264477df484f798562d0
 https://conda.anaconda.org/conda-forge/noarch/imagesize-1.2.0-py_0.tar.bz2#5879bd2c4b399a5072468e5fe587bf1b
 https://conda.anaconda.org/conda-forge/noarch/incremental-21.3.0-pyhd8ed1ab_0.tar.bz2#14fd665582bf1c52eeeb629ad9cfe99e
 https://conda.anaconda.org/conda-forge/noarch/lockfile-0.12.2-py_1.tar.bz2#c104d98e09c47519950cffb8dd5b4f10
 https://conda.anaconda.org/conda-forge/noarch/more-itertools-8.8.0-pyhd8ed1ab_0.tar.bz2#af8d3837f18d331839368bcb9f8cd3d9
 https://conda.anaconda.org/conda-forge/noarch/pastel-0.2.0-py_0.tar.bz2#3872ffc75ab52f883e0ffa8fcf1679d8
-https://conda.anaconda.org/conda-forge/noarch/pathspec-0.8.1-pyhd3deb0d_0.tar.bz2#fcd2fbb062b55d14a77e664c89ee17a6
+https://conda.anaconda.org/conda-forge/noarch/pathspec-0.9.0-pyhd8ed1ab_0.tar.bz2#f93dc0ccbc0a8472624165f6e256c7d1
 https://conda.anaconda.org/conda-forge/noarch/pkginfo-1.7.1-pyhd8ed1ab_0.tar.bz2#047d027698acbaa862e19f10b7b3755f
 https://conda.anaconda.org/conda-forge/noarch/ptyprocess-0.7.0-pyhd3deb0d_0.tar.bz2#359eeb6536da0e687af562ed265ec263
 https://conda.anaconda.org/conda-forge/noarch/py-1.10.0-pyhd3deb0d_0.tar.bz2#88ca1328ecc79a070214aa24911bace8
@@ -84,8 +85,9 @@ https://conda.anaconda.org/conda-forge/noarch/jinja2-3.0.1-pyhd8ed1ab_0.tar.bz2#
 https://conda.anaconda.org/conda-forge/osx-64/keyring-21.2.1-py37hf985489_0.tar.bz2#23deba8d5c8c6fd7af103275658d8647
 https://conda.anaconda.org/conda-forge/noarch/mdit-py-plugins-0.2.8-pyhd8ed1ab_0.tar.bz2#49236fcd746a124eb56d326f79e1d46d
 https://conda.anaconda.org/conda-forge/osx-64/setuptools-49.6.0-py37hf985489_3.tar.bz2#5030dea82548d67ec8b80882e8e4a099
+https://conda.anaconda.org/conda-forge/noarch/tomli-1.0.4-pyhd8ed1ab_0.tar.bz2#cb9918c78e1da734f9bbf5de5b8a0acd
 https://conda.anaconda.org/conda-forge/osx-64/virtualenv-20.4.7-py37hf985489_0.tar.bz2#8e0a82b5d8738d806b7dcfc736cac754
-https://conda.anaconda.org/conda-forge/noarch/black-21.5b2-pyhd8ed1ab_0.tar.bz2#919be0b3435cbe8e803c6bd738231f69
+https://conda.anaconda.org/conda-forge/noarch/black-21.7b0-pyhd8ed1ab_0.tar.bz2#48f2030aa3fcd4652046d49f354085b7
 https://conda.anaconda.org/conda-forge/noarch/click-default-group-1.2.2-pyhd8ed1ab_1.tar.bz2#72a46ffc25701c173932fd55cf0965d3
 https://conda.anaconda.org/conda-forge/noarch/isort-5.9.2-pyhd8ed1ab_0.tar.bz2#07da10685f7525681832cbae3a983c2f
 https://conda.anaconda.org/conda-forge/noarch/jsonschema-3.2.0-pyhd8ed1ab_3.tar.bz2#66125e28711d8ffc04a207a2b170316d
@@ -97,13 +99,13 @@ https://conda.anaconda.org/conda-forge/osx-64/pytest-3.10.1-py37_1000.tar.bz2#ae
 https://conda.anaconda.org/conda-forge/noarch/towncrier-21.3.0-pyhd8ed1ab_0.tar.bz2#5bb5580558f5b4b8c0f46c0eb03da7f0
 https://conda.anaconda.org/conda-forge/noarch/urllib3-1.26.6-pyhd8ed1ab_0.tar.bz2#dea5b6d93cfbfbc2a253168ad05b3f89
 https://conda.anaconda.org/conda-forge/noarch/pytest-cov-2.9.0-pyh9f0ad1d_0.tar.bz2#d88a8c752cb7f3e65b123450f2372ff5
-https://conda.anaconda.org/conda-forge/noarch/requests-2.25.1-pyhd3deb0d_0.tar.bz2#ae687aba31a1c400192a86a2e993ffdc
+https://conda.anaconda.org/conda-forge/noarch/requests-2.26.0-pyhd8ed1ab_0.tar.bz2#0ed2ccbde6db9dd5789068eb7194463f
 https://conda.anaconda.org/conda-forge/noarch/cachecontrol-0.12.6-py_0.tar.bz2#f847758d76d4d532caedadcd2180cab6
 https://conda.anaconda.org/conda-forge/noarch/codecov-2.1.11-pyhd3deb0d_0.tar.bz2#9c661c2c14b4667827218402e6624ad5
 https://conda.anaconda.org/conda-forge/noarch/ensureconda-1.4.1-pyhd8ed1ab_0.tar.bz2#52a7f7cc9076e2c8a25e15e19ad42821
 https://conda.anaconda.org/conda-forge/noarch/requests-toolbelt-0.9.1-py_0.tar.bz2#402668adee8fcba9a9c265cdc2a88f5a
-https://conda.anaconda.org/conda-forge/noarch/sphinx-4.1.0-pyh6c4a22f_0.tar.bz2#643ef11fff03e4a4fd7b633ed60bcf2e
-https://conda.anaconda.org/conda-forge/noarch/conda-lock-0.10.0-pyhd8ed1ab_0.tar.bz2#33053e3a6e0697b26771c51132e5e471
+https://conda.anaconda.org/conda-forge/noarch/sphinx-4.1.1-pyh6c4a22f_0.tar.bz2#61096eeaad7486b34e55f5fde298c104
+https://conda.anaconda.org/conda-forge/noarch/conda-lock-0.11.0-pyhd8ed1ab_0.tar.bz2#46795e954c5391a7b049e2d9f2a99407
 https://conda.anaconda.org/conda-forge/noarch/myst-parser-0.15.1-pyhd8ed1ab_0.tar.bz2#78e5b86c7b844536ef8aaf33c777473b
 https://conda.anaconda.org/conda-forge/osx-64/poetry-1.1.7-py37hf985489_0.tar.bz2#6c084130e49ddc20a36f7e9780ef4984
 https://conda.anaconda.org/conda-forge/noarch/sphinx-autodoc-typehints-1.12.0-pyhd8ed1ab_0.tar.bz2#2c5fe910a7f04e1fcd2cab84628e4a32
