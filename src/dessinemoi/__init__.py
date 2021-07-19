@@ -32,6 +32,8 @@ class FactoryRegistryEntry:
 
     If ``dict_constructor`` is set to ``None``, it means that the default
     constructor should be used.
+
+    .. versionadded:: 21.3.0
     """
 
     cls: Type = attr.ib()
@@ -40,13 +42,21 @@ class FactoryRegistryEntry:
 
 @attr.s(slots=True)
 class Factory:
-    #: Dictionary holding the factory registry.
     registry: Dict[str, FactoryRegistryEntry] = attr.ib(factory=dict)
+    """
+    Dictionary holding the factory registry.
+    
+    .. versionchanged:: 21.3.0
+       Changed type from ``Dict[str, Type]`` to 
+       ``Dict[str, FactoryRegistryEntry]``.
+    """
 
     @property
     def registered_types(self) -> List[Type]:
         """
         List of currently registered types, without duplicates.
+
+        .. versionadded:: 21.3.0
         """
         return list({x.cls for x in self.registry.values()})
 
@@ -125,6 +135,12 @@ class Factory:
         :raises ValueError:
             If ``allow_id_overwrite`` is ``False`` and ``type_id`` is already
             used to reference a type in the registry.
+
+        .. versionchanged:: 21.3.0
+           Made keyword-only.
+
+        .. versionchanged:: 21.3.0
+           Added ``dict_constructor`` argument.
         """
 
         if cls is not _MISSING:
@@ -190,6 +206,9 @@ class Factory:
 
         :raises TypeError:
             If the requested type is not allowed.
+
+        .. versionchanged:: 21.3.0
+           Added ``construct`` keyword argument.
         """
         try:
             entry = self.registry[type_id]
@@ -275,6 +294,9 @@ class Factory:
         :raises TypeError:
             If ``allowed_cls`` is specified and ``value.type`` refers to a
             disallowed type or ``type(value)`` is disallowed.
+
+        .. versionchanged:: 21.3.0
+           Made all args keyword-only except for ``value``.
         """
         if value is _MISSING:
             return lambda x: self._convert_impl(value=x, allowed_cls=allowed_cls)
