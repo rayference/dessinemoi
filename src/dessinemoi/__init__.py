@@ -204,6 +204,9 @@ class Factory:
         :return:
             Created object.
 
+        :raises ValueError:
+            If ``type_id`` does not reference a registered type.
+
         :raises TypeError:
             If the requested type is not allowed.
 
@@ -243,7 +246,11 @@ class Factory:
 
             # Query registry
             type_id = value_copy.pop("type")
-            entry = self.registry[type_id]
+
+            try:
+                entry = self.registry[type_id]
+            except KeyError as e:
+                raise ValueError(f"no type registered as '{type_id}'") from e
 
             # Check if class is allowed
             if allowed_cls is not None and not issubclass(entry.cls, allowed_cls):

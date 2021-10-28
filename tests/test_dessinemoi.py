@@ -121,6 +121,10 @@ def test_convert(factory):
     # Objects other than dictionaries are not modified
     assert factory.convert(merino) is merino
 
+    # Requesting a non-existing type raises a ValueError
+    with pytest.raises(ValueError):
+        factory.convert({"type": "bull"})
+
     # Conversion can be restricted to a specific type
     with pytest.raises(TypeError):
         assert factory.convert(Sheep(), allowed_cls=Lamb)
