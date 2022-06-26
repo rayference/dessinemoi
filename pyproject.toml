@@ -22,11 +22,11 @@ packages = [
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4"
-attrs = "*"
+attrs = ">=21.3.0"
 
 [tool.poetry.dev-dependencies]
 # test
-pytest = "^3.4"
+pytest = "*"
 pytest-cov = "*"
 codecov = "*"
 # dev
