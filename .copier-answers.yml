@@ -1,0 +1,23 @@
+
+# Changes here will be overwritten by Copier
+_commit: 0.7.1
+_src_path: gh:leroyvn/copier-pdm
+author_email: vincent.leroy@rayference.eu
+author_fullname: Vincent Leroy
+author_username: leroyvn
+copyright_date: '2022'
+copyright_holder: Vincent Leroy
+copyright_holder_email: vincent.leroy@rayference.eu
+copyright_license: MIT
+docs_sphinx: true
+project_description: A simple factory implementation written in Python
+project_name: Dessine-moi
+python_conda_env_name: dessinemoi
+python_package_command_line_name: dessinemoi
+python_package_distribution_name: dessinemoi
+python_package_import_name: dessinemoi
+repository_name: dessinemoi
+repository_namespace: leroyvn
+repository_provider: github.com
+use_precommit: false
+
