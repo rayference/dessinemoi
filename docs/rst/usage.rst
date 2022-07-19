@@ -32,10 +32,10 @@ class:
 
 .. doctest::
 
-   >>> import attr
-   >>> @attr.s
+   >>> import attrs
+   >>> @attrs.define
    ... class Sheep:
-   ...     wool = attr.ib(default="some")
+   ...     wool = attrs.field(default="some")
 
 We can now register this class to the factory using the
 :meth:`~.Factory.register` method:
@@ -55,7 +55,7 @@ class attribute to set the class's ID in the registry:
 .. doctest::
 
    >>> @factory.register
-   ... @attr.s
+   ... @attrs.define
    ... class Lamb(Sheep):
    ...     _TYPE_ID = "lamb"
    >>> factory

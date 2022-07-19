@@ -11,6 +11,7 @@
 - Switch from Poetry to PDM for project management ({ghpr}`3`).
 - Apply Copier template ({ghpr}`3`).
 - Restructure code to fit implementation in a dedicated module ({ghpr}`3`).
+- Switch to next-generation attrs API ({ghpr}`1`).
 
 ## Dessine-moi 21.3.0 (2021-07-19)
 

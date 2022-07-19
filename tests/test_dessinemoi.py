@@ -1,4 +1,4 @@
-import attr
+import attrs
 import pytest as pytest
 
 import dessinemoi
@@ -54,17 +54,17 @@ def test_factory_register(factory):
 
 def test_factory_create(factory):
     @factory.register
-    @attr.s(frozen=True)
+    @attrs.frozen
     class Sheep:
         _TYPE_ID = "sheep"
-        age = attr.ib()
-        name = attr.ib()
+        age = attrs.field()
+        name = attrs.field()
 
     @factory.register
-    @attr.s(frozen=True)
+    @attrs.frozen
     class Ram(Sheep):
         _TYPE_ID = "ram"
-        name = attr.ib(default="Gorki")
+        name = attrs.field(default="Gorki")
 
     # We can use the factory to instantiate new objects with positional arguments only
     assert factory.create("sheep", args=(5, "Dolly")) == Sheep(5, "Dolly")
@@ -87,11 +87,11 @@ def test_factory_create(factory):
 
 def test_factory_classmethod(factory):
     @factory.register
-    @attr.s(frozen=True)
+    @attrs.frozen
     class Sheep:
         _TYPE_ID = "sheep"
-        age = attr.ib()
-        name = attr.ib()
+        age = attrs.field()
+        name = attrs.field()
 
         @classmethod
         def old(cls, name):
@@ -104,13 +104,13 @@ def test_factory_classmethod(factory):
 
 def test_convert(factory):
     @factory.register
-    @attr.s(frozen=True)
+    @attrs.frozen
     class Sheep:
         _TYPE_ID = "sheep"
-        wool = attr.ib(default="some")
+        wool = attrs.field(default="some")
 
     @factory.register
-    @attr.s(frozen=True)
+    @attrs.frozen
     class Lamb(Sheep):
         _TYPE_ID = "lamb"
 
@@ -147,19 +147,19 @@ def test_module_api():
 
     # Module allows direct access to factory instance API
     @dessinemoi.register
-    @attr.s(frozen=True)
+    @attrs.frozen
     class Sheep:
         _TYPE_ID = "sheep"
-        wool = attr.ib(default="some")
+        wool = attrs.field(default="some")
 
     assert dessinemoi.create("sheep") == Sheep()
     assert dessinemoi.convert({"type": "sheep"}) == Sheep()
 
 
 def test_factory_dict_constructor(factory):
-    @attr.s
+    @attrs.define
     class Sheep:
-        wool = attr.ib()
+        wool = attrs.field()
 
         @classmethod
         def merino(cls):
