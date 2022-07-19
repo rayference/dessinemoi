@@ -2,6 +2,16 @@
 
 [![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue?style=flat-square)](https://calver.org/)
 
+## Dessine-moi 22.1.0 (unreleased)
+
+### Features
+
+### Developer side
+
+- Switch from Poetry to PDM for project management ({ghpr}`3`).
+- Apply Copier template ({ghpr}`3`).
+- Restructure code to fit implementation in a dedicated module ({ghpr}`3`).
+
 ## Dessine-moi 21.3.0 (2021-07-19)
 
 ### Features
