@@ -1,12 +1,13 @@
 from collections.abc import MutableMapping
 from copy import copy
-from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Type, Union
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Type, Union
 
 import attr
 
 # -- Version information -------------------------------------------------------
 
-__version__ = "21.4.0-dev0"
+from ._version import version as __version__  #: isort: skip
+
 
 # -- Sentinel value for unset parameters ---------------------------------------
 
@@ -16,6 +17,7 @@ class _Missing:
 
 
 _MISSING = _Missing
+
 
 # -- Core stuff ----------------------------------------------------------------
 
@@ -45,9 +47,9 @@ class Factory:
     registry: Dict[str, FactoryRegistryEntry] = attr.ib(factory=dict)
     """
     Dictionary holding the factory registry.
-    
+
     .. versionchanged:: 21.3.0
-       Changed type from ``Dict[str, Type]`` to 
+       Changed type from ``Dict[str, Type]`` to
        ``Dict[str, FactoryRegistryEntry]``.
     """
 

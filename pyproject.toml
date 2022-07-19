@@ -1,101 +1,111 @@
-# -- Poetry --------------------------------------------------------------------
-
 [build-system]
-requires = ["poetry_core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
 
-[tool.poetry]
+[project]
 name = "dessinemoi"
-version = "21.4.0-dev0"
-description = "A simple Python factory system"
-authors = ["Vincent Leroy <vincent.leroy@rayference.eu>"]
-maintainers = ["Vincent Leroy <vincent.leroy@rayference.eu>"]
+description = "A simple factory implementation written in Python"
+authors = [{name = "Vincent Leroy", email = "vincent.leroy@rayference.eu"}]
+license = {file = "LICENSE"}
 readme = "README.md"
-license = "MIT"
-homepage = "https://github.com/leroyvn/dessinemoi"
-documentation  = "https://dessinemoi.readthedocs.io"
-packages = [
-    { include = "dessinemoi", from = "src" },
+requires-python = ">=3.7"
+keywords = []
+dynamic = ["version"]
+classifiers = [
+    "Development Status :: 3 - Alpha"
+]
+dependencies = [
+  "attrs>=21",
 ]
 
-# -- Dependencies --------------------------------------------------------------
+[project.optional-dependencies]
 
-[tool.poetry.dependencies]
-python = ">=3.7,<4"
-attrs = ">=21.3.0"
+[project.urls]
+Homepage = "https://github.com/leroyvn/dessinemoi"
+Documentation = "https://dessinemoi.readthedocs.io"
+Changelog = "https://github.com/leroyvn/dessinemoi/blob/main/CHANGELOG.md"
+Repository = "https://github.com/leroyvn/dessinemoi"
+Issues = "https://github.com/leroyvn/dessinemoi/issues"
 
-[tool.poetry.dev-dependencies]
-# test
-pytest = "*"
-pytest-cov = "*"
-codecov = "*"
-# dev
-black = "*"
-isort = ">5"
-conda-lock = "^0.9"
-bump2version = "*"
-# docs
-sphinx = ">=3.1"
-furo = "*"
-sphinx-copybutton = "*"
-sphinx-autodoc-typehints = "*"
-towncrier = "^21.3.0"
+[tool.pdm]
+version = {use_scm = true}
+package-dir = "src"
 
-[tool.conda-lock]
-channels = ["conda-forge"]
-
-[tool.conda-lock.dependencies]
-setuptools = "*"  # Required to install package in dev mode
-poetry = "*"  # Required to manage dependencies
-
-# -- Coverage ------------------------------------------------------------------
-
-[tool.coverage.paths]
-source = ["src", "*/site-packages"]
-
-[tool.coverage.run]
-branch = true
-source = ["dessinemoi"]
-
-[tool.coverage.report]
-show_missing = true
-
-# -- Formatters ----------------------------------------------------------------
+[tool.pdm.dev-dependencies]
+docs = [
+    "sphinx>=4.0",
+    "sphinx-autobuild>=2021.3",
+    "sphinx-autodoc-typehints>=1.18",
+    "furo>=2021.11",
+    "myst-parser>=0.16",
+    "sphinx-copybutton>=0.4",
+]
+format = [
+    "autoflake>=1.4",
+    "black>=22.1",
+    "isort>=5.10",
+]
+maintain = []
+quality = []
+security = []
+tests = [
+    "pytest>=6.2",
+    "pytest-xdist>=2.4",
+    "pytest-cov>=3.0",
+    "xdoctest>=0.15.0",
+]
+typing = []
 
 [tool.black]
 line-length = 88
 
 [tool.isort]
-profile = "black"
+line_length = 88
+style = "black"
 
-# -- Changelog management ------------------------------------------------------
+[tool.conda-lock]
+channels = ["conda-forge", "defaults"]
 
-[tool.towncrier]
-directory = "changes"
-package = "dessinemoi"
-package_dir = "src"
-filename = "CHANGELOG.rst"
-title_format = false  # Title handled by template
-template = "changes/_template.rst"
-underlines = "-^~"
-wrap = true
+[tool.conda-lock.dependencies]
+pip = "*"
 
-[[tool.towncrier.type]]
-directory = "feature"
-name = "Features"
-showcontent = true
+[tool.coverage.run]
+branch = true
+parallel = true
+source = [
+  "src/",
+]
 
-[[tool.towncrier.type]]
-directory = "bugfix"
-name = "Bugfixes"
-showcontent = true
+[tool.coverage.paths]
+equivalent = [
+  "src/",
+  "__pypackages__/",
+]
 
-[[tool.towncrier.type]]
-directory = "removal"
-name = "Deprecations and removals"
-showcontent = true
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+omit = [
+  "src/*/__init__.py",
+  "src/*/_version.py",
+]
+precision = 2
 
-[[tool.towncrier.type]]
-directory = "dev"
-name = "Developer-side changes"
-showcontent = true
+[tool.pytest.ini_options]
+addopts = "--doctest-glob='*.rst'"
+norecursedirs = [
+  ".git",
+  ".env",
+  "dist",
+  "build",
+  "__pypackages__",
+]
+python_files = [
+  "test_*.py",
+  "*_test.py",
+  "tests.py",
+]
+testpaths = [
+  "docs",
+  "tests",
+]
