@@ -8,7 +8,6 @@ The narrator of Antoine de Saint-Exupéry's Little Prince probably dreamt of a f
 [![Conda version](https://img.shields.io/conda/v/eradiate/dessinemoi?color=blue&style=flat-square)](https://anaconda.org/eradiate/dessinemoi)
 
 [![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/leroyvn/dessinemoi/Tests/main?style=flat-square)](https://github.com/leroyvn/dessinemoi/actions/workflows/tests.yml)
-[![Codecov](https://codecov.io/gh/leroyvn/dessinemoi/branch/main/graph/badge.svg)](https://codecov.io/gh/leroyvn/dessinemoi)
 [![Documentation Status](https://img.shields.io/readthedocs/dessinemoi?style=flat-square)](https://dessinemoi.readthedocs.io)
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-black?style=flat-square)](https://black.readthedocs.io)
