@@ -2,7 +2,7 @@ from collections.abc import MutableMapping
 from copy import copy
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Type, Union
 
-import attr
+import attrs
 
 # -- Sentinel value for unset parameters ---------------------------------------
 
@@ -17,7 +17,7 @@ _MISSING = _Missing
 # -- Core stuff ----------------------------------------------------------------
 
 
-@attr.s(frozen=True, slots=True)
+@attrs.frozen
 class FactoryRegistryEntry:
     """
     Data class holding a ``(cls: Type, dict_constructor: Optional[str])`` pair.
@@ -33,13 +33,13 @@ class FactoryRegistryEntry:
     .. versionadded:: 21.3.0
     """
 
-    cls: Type = attr.ib()
-    dict_constructor: Optional[str] = attr.ib()
+    cls: Type = attrs.field()
+    dict_constructor: Optional[str] = attrs.field()
 
 
-@attr.s(slots=True)
+@attrs.define
 class Factory:
-    registry: Dict[str, FactoryRegistryEntry] = attr.ib(factory=dict)
+    registry: Dict[str, FactoryRegistryEntry] = attrs.field(factory=dict)
     """
     Dictionary holding the factory registry.
 
