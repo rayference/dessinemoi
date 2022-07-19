@@ -6,7 +6,7 @@ from ._version import version as __version__  #: isort: skip
 
 # -- Public API ----------------------------------------------------------------
 
-from ._core import Factory, FactoryRegistryEntry  #: isort: skip
+from ._core import Factory, FactoryRegistryEntry, LazyType  #: isort: skip
 
 # -- API to built-in factory instance ------------------------------------------
 
@@ -28,5 +28,6 @@ def __getattr__(name: str) -> Any:
 __all__ = [
     "Factory",
     "FactoryRegistryEntry",
+    "LazyType",
     "factory",
 ]

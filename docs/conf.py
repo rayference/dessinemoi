@@ -46,6 +46,8 @@ intersphinx_mapping = {
     "attrs": ("https://www.attrs.org/en/stable/", None),
 }
 
+autodoc_member_order = "bysource"
+
 # -- Options for HTML output -------------------------------------------------
 
 html_static_path = ["_static"]

@@ -6,6 +6,8 @@
 
 ### Features
 
+- `Factory`: Support string-based lazy registration ({ghpr}`4`).
+
 ### Developer side
 
 - Switch from Poetry to PDM for project management ({ghpr}`3`).

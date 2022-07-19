@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from collections.abc import MutableMapping
 from copy import copy
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Type, Union
@@ -14,10 +16,99 @@ class _Missing:
 _MISSING = _Missing
 
 
-# -- Core stuff ----------------------------------------------------------------
+# -- Utilities -----------------------------------------------------------------
+
+
+def _fullname(cls):
+    """
+    Easily get fully qualified name of a class.
+    """
+    if isinstance(cls, LazyType):
+        return cls.fullname
+
+    else:
+        mod = cls.__module__
+        if mod == "builtins":
+            return cls.__qualname__  # avoid outputs like 'builtins.str'
+        return f"{mod}.{cls.__qualname__}"
+
+
+# -- Core components -----------------------------------------------------------
 
 
 @attrs.frozen
+class LazyType:
+    """
+    A lightweight data class specifying a lazily loaded type.
+
+    .. versionadded:: 22.1.0
+    """
+
+    mod: str = attrs.field(validator=attrs.validators.instance_of(str))
+    """
+    Module where the imported object will be looked up.
+    """
+
+    attr: str = attrs.field(validator=attrs.validators.instance_of(str))
+    """
+    Name of the imported object.
+    """
+
+    @attr.validator
+    @mod.validator
+    def _validator(self, attribute, value):
+        if value == "":
+            raise ValueError(
+                f"while validating '{attribute.name}': got '{value}', "
+                "must be non-empty"
+            )
+
+    @property
+    def fullname(self):
+        """
+        Fully qualified name of the object.
+        """
+        return f"{self.mod}.{self.attr}"
+
+    @classmethod
+    def from_str(cls, value: str) -> LazyType:
+        """
+        Initialise a :class:`LazyType` from a string representing its fully
+        qualified name.
+
+        :param value:
+            String representing an absolute import path to the target type.
+
+        :return:
+            Created lazy type specification.
+
+        :raises ValueError:
+            If the ``value`` cannot be interpreted as a fully qualified name
+            and, therefore, is suspected to be a relative import path.
+        """
+        decomposed = value.split(".")
+        if len(decomposed) < 2 or value.startswith("."):
+            raise ValueError(
+                f"'{value}' seems to specify a relative import path, "
+                "please use a fully qualified name"
+            )
+
+        mod = ".".join(decomposed[:-1])
+        attr = decomposed[-1]
+        return cls(mod, attr)
+
+    def load(self) -> Type:
+        """
+        Import the specified lazy type.
+
+        :return:
+            Imported type.
+        """
+        mod = __import__(self.mod)
+        return getattr(mod, self.attr)
+
+
+@attrs.define
 class FactoryRegistryEntry:
     """
     Data class holding a ``(cls: Type, dict_constructor: Optional[str])`` pair.
@@ -33,7 +124,7 @@ class FactoryRegistryEntry:
     .. versionadded:: 21.3.0
     """
 
-    cls: Type = attrs.field()
+    cls: Union[None, Type, LazyType] = attrs.field()
     dict_constructor: Optional[str] = attrs.field()
 
 
@@ -49,35 +140,53 @@ class Factory:
     """
 
     @property
-    def registered_types(self) -> List[Type]:
+    def registered_types(self) -> List[str]:
         """
         List of currently registered types, without duplicates.
 
         .. versionadded:: 21.3.0
         """
-        return list({x.cls for x in self.registry.values()})
+        return list({_fullname(x.cls) for x in self.registry.values()})
 
     def _register_impl(
         self,
-        cls: Type,
+        cls: Union[Type, LazyType, str],
         type_id: Optional[str] = None,
         dict_constructor: Optional[str] = None,
         allow_aliases: bool = False,
         allow_id_overwrite: bool = False,
+        allow_lazy: bool = True,
     ) -> Any:
+        if isinstance(cls, str):
+            cls = LazyType.from_str(cls)
+
+        # Upon request, force eager loading of lazy type declarations
+        if isinstance(cls, LazyType) and not allow_lazy:
+            cls = cls.load()
+
+        # If no ID is specified and the type declares one, use it
         if type_id is None:
-            type_id = cls._TYPE_ID
+            try:
+                type_id = cls._TYPE_ID
+            except AttributeError as e:
+                raise ValueError(
+                    f"while registering {cls}: please declare a type ID"
+                ) from e
 
-        if not allow_aliases and cls in self.registered_types:
-            raise ValueError(f"{cls} already registered")
+        # Check if type is already registered
+        cls_fullname = _fullname(cls)
+        if not allow_aliases and cls_fullname in self.registered_types:
+            raise ValueError(f"'{cls_fullname}' is already registered")
 
+        # Check if ID is already used
         if not allow_id_overwrite and type_id in self.registry.keys():
             raise ValueError(
-                f"'{type_id}' already used to reference {self.registry[type_id]}"
+                f"'{type_id}' is already used to reference "
+                f"'{_fullname(self.registry[type_id].cls)}'"
             )
 
-        # Check that dict constructor exists
-        if dict_constructor is not None:
+        # Check that dict constructor exists (skipped with lazy types)
+        if isinstance(cls, type) and dict_constructor is not None:
             try:
                 getattr(cls, dict_constructor)
             except AttributeError as e:
@@ -85,10 +194,13 @@ class Factory:
                     f"class method '{cls.__name__}.{dict_constructor}()' does not exist"
                 ) from e
 
+        # All checks done: perform actual registration
         self.registry[type_id] = FactoryRegistryEntry(
             cls=cls,
             dict_constructor=dict_constructor,
         )
+
+        return cls
 
     def register(
         self,
@@ -98,6 +210,7 @@ class Factory:
         dict_constructor: Optional[str] = None,
         allow_aliases: bool = False,
         allow_id_overwrite: bool = False,
+        allow_lazy: bool = True,
     ) -> Any:
         """
         If parameter ``cls`` is passed, register ``cls`` to the factory.
@@ -110,10 +223,12 @@ class Factory:
             If set, type to register to the factory. If unset, this function
             returns a callable which can be used to register classes. In
             practice, this parameter is unset when the method is used as a
-            class decorator.
+            class decorator. A :class:`LazyType` instance or a string
+            convertible to :class:`LazyType` may also be passed.
 
         :param type_id:
-            Identifier string used to register ``cls``.
+            Identifier string used to register ``cls``. Required if ``cls`` is a
+            lazy type or if it does not specify its identifier itself.
 
         :param dict_constructor:
             Class method to be used for dictionary-based construction. If
@@ -125,6 +240,9 @@ class Factory:
 
         :param allow_id_overwrite:
             If ``True``, existing IDs can be overwritten.
+
+        :param allow_lazy:
+            If ``False``, force eager loading of lazy types.
 
         :raises ValueError:
             If ``allow_aliases`` is ``False`` and ``cls`` is already registered.
@@ -138,34 +256,48 @@ class Factory:
 
         .. versionchanged:: 21.3.0
            Added ``dict_constructor`` argument.
+
+        .. versionchanged:: 22.1.0
+           Added ``allow_lazy`` argument. Accept :class:`LazyType` and strings
+           for ``cls``.
         """
 
         if cls is not _MISSING:
             try:
-                self._register_impl(
+                return self._register_impl(
                     cls,
                     type_id=type_id,
                     dict_constructor=dict_constructor,
                     allow_aliases=allow_aliases,
                     allow_id_overwrite=allow_id_overwrite,
+                    allow_lazy=allow_lazy,
                 )
-                return cls
             except ValueError:
                 raise
 
         else:
 
             def inner_wrapper(wrapped_cls):
-                self._register_impl(
+                return self._register_impl(
                     wrapped_cls,
                     type_id=type_id,
                     dict_constructor=dict_constructor,
                     allow_aliases=allow_aliases,
                     allow_id_overwrite=allow_id_overwrite,
                 )
-                return wrapped_cls
 
             return inner_wrapper
+
+    def get_type(self, type_id: str) -> Type:
+        entry = self.registry[type_id]
+
+        if isinstance(entry.cls, LazyType):
+            cls = entry.cls.load()
+            self.registry[type_id].cls = cls
+        else:
+            cls = entry.cls
+
+        return cls
 
     def create(
         self,
@@ -211,15 +343,14 @@ class Factory:
            Added ``construct`` keyword argument.
         """
         try:
-            entry = self.registry[type_id]
-            cls = entry.cls
+            cls = self.get_type(type_id)
         except KeyError as e:
             raise ValueError(f"no type registered as '{type_id}'") from e
 
         if allowed_cls is not None and not issubclass(cls, allowed_cls):
             raise TypeError(
-                f"'{type_id}' does not reference allowed type {allowed_cls} or any "
-                "of its subtypes"
+                f"'{type_id}' does not reference allowed type {allowed_cls} or "
+                "any of its subtypes"
             )
 
         if args is None:
