@@ -19,9 +19,6 @@ Dessine-moi
 .. image:: https://img.shields.io/github/workflow/status/leroyvn/dessinemoi/Tests/main?style=flat-square
    :target: https://github.com/leroyvn/dessinemoi/actions/workflows/tests.yml
 
-.. image:: https://codecov.io/gh/leroyvn/dessinemoi/branch/main/graph/badge.svg?style=flat-square
-   :target: https://codecov.io/gh/leroyvn/dessinemoi
-
 .. image:: https://img.shields.io/readthedocs/dessinemoi?style=flat-square
    :target: https://dessinemoi.readthedocs.io
 
@@ -87,14 +84,21 @@ The development is supported by `Rayference <https://www.rayference.eu>`_.
 
 .. toctree::
    :hidden:
+   :caption: Use
 
    rst/usage
 
 .. toctree::
-   :caption: Development
+   :hidden:
+   :caption: Reference
+
+   rst/api
+   src/whats_new.md
+
+
+.. toctree::
+   :caption: Develop
    :hidden:
 
-   rst/dev
-   rst/api
-   rst/changes
+   src/contributing.md
    GitHub repository <https://github.com/leroyvn/dessinemoi>
