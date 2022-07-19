@@ -2,12 +2,18 @@ import attrs
 import pytest as pytest
 
 import dessinemoi
-from dessinemoi import Factory
+from dessinemoi import Factory, LazyType
 
 
 @pytest.fixture
 def factory():
     yield Factory()
+
+
+@attrs.define
+class LazyTypeTest:
+    # Class for lazy type testing
+    pass
 
 
 def test_factory_instantiate(factory):
@@ -50,6 +56,56 @@ def test_factory_register(factory):
     assert "agneau" in factory.registry
     assert factory.registry["lamb"].cls is Lamb
     assert factory.registry["agneau"].cls is Lamb
+
+
+def test_factory_lazy(factory):
+    # Lazy types must have non-empty names
+    with pytest.raises(ValueError):
+        LazyType("", "")
+
+    # Eager registration immediately dereferences a lazy type
+    factory.register(
+        f"{__name__}.LazyTypeTest",
+        type_id="lazy",
+        allow_lazy=False,
+    )
+    assert factory.registry["lazy"].cls is LazyTypeTest
+
+    # A LazyType instance can be registered and is resolved upon call to create()
+    factory.register(
+        LazyType(__name__, "LazyTypeTest"),
+        type_id="lazy",
+        allow_id_overwrite=True,
+        allow_aliases=True,
+    )
+    assert isinstance(factory.registry["lazy"].cls, dessinemoi.LazyType)
+    assert isinstance(factory.create("lazy"), LazyTypeTest)
+    # After dereferencing, the lazy type is replaced by the actual type
+    assert factory.registry["lazy"].cls is LazyTypeTest
+
+    # Strings are interpreted as lazy types
+    factory.register(
+        f"{__name__}.LazyTypeTest",
+        type_id="lazy",
+        allow_id_overwrite=True,
+        allow_aliases=True,
+    )
+    assert isinstance(factory.create("lazy"), LazyTypeTest)
+    factory.register(
+        f"{__name__}.LazyTypeTest",
+        type_id="lazy",
+        allow_id_overwrite=True,
+        allow_aliases=True,
+    )
+    assert isinstance(factory.create("lazy"), LazyTypeTest)
+
+    # Lazy types require an ID
+    with pytest.raises(ValueError):
+        factory.register(
+            f"{__name__}.LazyTypeTest",
+            allow_id_overwrite=True,
+            allow_aliases=True,
+        )
 
 
 def test_factory_create(factory):
@@ -176,3 +232,26 @@ def test_factory_dict_constructor(factory):
     assert factory.registry["sheep"].dict_constructor == "merino"
     s = factory.convert({"type": "sheep"})
     assert s == Sheep(wool="lots")
+
+
+def test_lazy_type():
+    from datetime import datetime
+
+    # Lazy types are dereferenced upon call to load()
+    lazy_datetime = dessinemoi.LazyType("datetime", "datetime")
+    assert lazy_datetime.load() is datetime
+
+    # String-based constructor tests
+    # -- Standard pattern: absolute path
+    assert dessinemoi.LazyType.from_str("foo.bar") == dessinemoi.LazyType(
+        mod="foo", attr="bar"
+    )
+    # -- Absolute path with nested submodules
+    assert dessinemoi.LazyType.from_str("foo.bar.baz") == dessinemoi.LazyType(
+        mod=f"foo.bar", attr="baz"
+    )
+    # -- Relative imports are not allowed
+    with pytest.raises(ValueError):
+        dessinemoi.LazyType.from_str("foo")
+    with pytest.raises(ValueError):
+        dessinemoi.LazyType.from_str(".foo")

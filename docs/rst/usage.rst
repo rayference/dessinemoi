@@ -190,3 +190,46 @@ that.
 
 Fortunately, implementing custom conversion methods is simple: subclass
 :class:`.Factory` and reimplement its :meth:`~.Factory.convert` method!
+
+Lazy registration
+^^^^^^^^^^^^^^^^^
+
+Sometimes, registering a type to a factory without importing it may be
+desirable. This is useful, for instance, when it is not sure that the registered
+type will be used and therefore the import overhead may simply be unnecessary.
+
+*Dessine-moi* supports lazy registration, which defers type import to
+instantiation by the factory. This comes at the cost of some of the safety
+checks, because no detailed information about the registered type will be
+available.
+
+Lazy registration can be performed by passing the fully qualified name of the
+target type as a string:
+
+.. doctest::
+
+   >>> factory.registry.clear()
+   >>> factory.register("datetime.datetime", type_id="datetime")
+   LazyType(mod='datetime', attr='datetime')
+
+At this stage, the :class:`datetime.datetime` class is not imported, it is
+simply referenced by a :class:`.LazyType` instance.
+
+.. doctest::
+
+   >>> factory.registry
+   {'datetime': FactoryRegistryEntry(cls=LazyType(mod='datetime', attr='datetime'), dict_constructor=None)}
+
+If we call :meth:`Factory.create`, the target type is imported and returned:
+
+.. doctest::
+
+   >>> factory.create("datetime", args=(2222, 2, 22))
+   datetime.datetime(2222, 2, 22, 0, 0)
+
+Since the type is imported, its registry entry is also updated:
+
+.. doctest::
+
+   >>> factory.registry
+   {'datetime': FactoryRegistryEntry(cls=<class 'datetime.datetime'>, dict_constructor=None)}
