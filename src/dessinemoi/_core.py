@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib
 from collections.abc import MutableMapping
 from copy import copy
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Type, Union
@@ -104,7 +105,7 @@ class LazyType:
         :return:
             Imported type.
         """
-        mod = __import__(self.mod)
+        mod = importlib.import_module(self.mod)
         return getattr(mod, self.attr)
 
 
