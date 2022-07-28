@@ -2,6 +2,10 @@
 
 [![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue?style=flat-square)](https://calver.org/)
 
+## Dessine-moi 22.1.1 (unreleased)
+
+- `LazyType.convert()`: Resolve lazy types ({ghpr}`5`).
+
 ## Dessine-moi 22.1.1 (2022-07-28)
 
 - `LazyType.load()`: Replace `__import__()` with `importlib.import_module()`

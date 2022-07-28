@@ -381,10 +381,13 @@ class Factory:
             except KeyError as e:
                 raise ValueError(f"no type registered as '{type_id}'") from e
 
+            # Resolve lazy type if necessary
+            cls = entry.cls.load() if isinstance(entry.cls, LazyType) else entry.cls
+
             # Check if class is allowed
-            if allowed_cls is not None and not issubclass(entry.cls, allowed_cls):
+            if allowed_cls is not None and not issubclass(cls, allowed_cls):
                 raise TypeError(
-                    f"conversion to object type '{type_id}' ({entry.cls}) is not allowed"
+                    f"conversion to object type '{type_id}' ({cls}) is not allowed"
                 )
 
             # Construct object
