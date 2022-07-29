@@ -32,28 +32,52 @@ def test_factory_register(factory):
         cls=Sheep, dict_constructor=None
     )
 
-    # Registering class again fails if aliases are not allowed
+    # Registering class again fails
     with pytest.raises(ValueError):
         factory.register(Sheep, type_id="mouton")
-    factory.register(Sheep, type_id="mouton", allow_aliases=True)
-    assert factory.registry["mouton"] == dessinemoi.FactoryRegistryEntry(
-        cls=Sheep, dict_constructor=None
-    )
 
     # Overwriting existing ID fails if not explicitly allowed
     with pytest.raises(ValueError):
         factory.register(int, type_id="sheep")
-    factory.register(int, type_id="sheep", allow_id_overwrite=True)
+    factory.register(int, type_id="sheep", overwrite_id=True)
 
     # A new class can also be registered with a decorator
-    # Decorator uses can also be chained
-    @factory.register(type_id="agneau", allow_aliases=True)  # Full function call form
     @factory.register  # Optionless form
     class Lamb(Sheep):
         _TYPE_ID = "lamb"
 
     assert "lamb" in factory.registry
+    assert factory.registry["lamb"].cls is Lamb
+
+    @factory.register(type_id="agneau")  # Full form
+    class Agneau(Sheep):
+        pass
+
     assert "agneau" in factory.registry
+    assert factory.registry["agneau"].cls is Agneau
+
+
+def test_factory_alias(factory):
+    # Registering an alias to a nonexisting type fails
+    with pytest.raises(ValueError):
+        factory.alias("lamb", "agneau")
+
+    # Aliasing an existing type works as expected
+    @factory.register(type_id="lamb")
+    class Lamb:
+        pass
+
+    factory.alias("lamb", "agneau")
+    assert "agneau" in factory.registry
+    assert factory.registry["agneau"].cls is Lamb
+
+    # Aliasing a type with an existing type ID fails
+    with pytest.raises(ValueError):
+        factory.alias("lamb", "agneau")
+
+    # Aliases can be defined upon registration
+    factory.registry.clear()
+    factory.register(Lamb, type_id="lamb", aliases=["agneau"])
     assert factory.registry["lamb"].cls is Lamb
     assert factory.registry["agneau"].cls is Lamb
 
@@ -72,11 +96,10 @@ def test_factory_lazy(factory):
     assert factory.registry["lazy"].cls is LazyTypeTest
 
     # A LazyType instance can be registered and is resolved upon call to create()
+    del factory.registry["lazy"]
     factory.register(
         LazyType(__name__, "LazyTypeTest"),
         type_id="lazy",
-        allow_id_overwrite=True,
-        allow_aliases=True,
     )
     assert isinstance(factory.registry["lazy"].cls, dessinemoi.LazyType)
     assert isinstance(factory.create("lazy"), LazyTypeTest)
@@ -84,27 +107,28 @@ def test_factory_lazy(factory):
     assert factory.registry["lazy"].cls is LazyTypeTest
 
     # Strings are interpreted as lazy types
+    del factory.registry["lazy"]
     factory.register(
         f"{__name__}.LazyTypeTest",
         type_id="lazy",
-        allow_id_overwrite=True,
-        allow_aliases=True,
+        overwrite_id=True,
     )
     assert isinstance(factory.create("lazy"), LazyTypeTest)
+
+    del factory.registry["lazy"]
     factory.register(
         f"{__name__}.LazyTypeTest",
         type_id="lazy",
-        allow_id_overwrite=True,
-        allow_aliases=True,
+        overwrite_id=True,
     )
     assert isinstance(factory.create("lazy"), LazyTypeTest)
 
     # Lazy types require an ID
+    aliases = (True,)
     with pytest.raises(ValueError):
         factory.register(
             f"{__name__}.LazyTypeTest",
-            allow_id_overwrite=True,
-            allow_aliases=True,
+            overwrite_id=True,
         )
 
 
