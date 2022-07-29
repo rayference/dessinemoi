@@ -2,7 +2,7 @@
 
 [![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue?style=flat-square)](https://calver.org/)
 
-## Dessine-moi 22.2.0 (unreleased)
+## Dessine-moi 22.2.0 (2022-07-29)
 
 ## Fixes and improvements
 
