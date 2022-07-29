@@ -290,6 +290,18 @@ class Factory:
             return inner_wrapper
 
     def get_type(self, type_id: str) -> Type:
+        """
+        Return the type corresponding to the requested type ID. Lazy types will
+        be loaded.
+
+        :param type_id:
+            ID of a registered type.
+
+        :returns:
+            Corresponding type.
+
+        .. versionadded:: 22.1.1
+        """
         entry = self.registry[type_id]
 
         if isinstance(entry.cls, LazyType):
