@@ -2,11 +2,17 @@
 
 [![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue?style=flat-square)](https://calver.org/)
 
-## Dessine-moi 22.1.1 (unreleased)
+## Dessine-moi 22.2.0 (unreleased)
+
+## Fixes and improvements
 
 - `LazyType.convert()`: Resolve lazy types ({ghpr}`5`).
+- `Factory`: New alias system ({ghpr}`6`).
+- `Factory.register()`: Rename `allow_id_overwrite` to `overwrite_id` ({ghpr}``6).
 
 ## Dessine-moi 22.1.1 (2022-07-28)
+
+### Fixes and improvements
 
 - `LazyType.load()`: Replace `__import__()` with `importlib.import_module()`
   ({ghpr}`4`).
@@ -36,7 +42,6 @@
 ### Features
 
 - `Factory.create()`: Add `construct` keyword argument ({ghcommit}`a2e5874`).
-
 
 ## Dessine-moi 21.1.0 (2021-06-02)
 

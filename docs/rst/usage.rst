@@ -67,25 +67,37 @@ class attribute to set the class's ID in the registry:
 .. note:: When used as a decorator, :meth:`~.Factory.register` is best used
    last (*i.e.* at the top of the sequence).
 
-The :meth:`~.Factory.register` method implements safeguards which can be
-bypassed with dedicated keyword arguments:
+By default, ID overwrite is not allowed. The ``overwrite_id`` parameter can be
+set to ``True`` to force the registration of a type with an existing ID.
 
-* if ``allow_aliases`` is ``True``, a type can be registered multiple times with
-  different IDs (the default value is ``False``):
-
-  .. doctest::
-
-     >>> factory.register(Sheep, type_id="mouton", allow_aliases=True)
-     <class '__main__.Sheep'>
-     >>> factory
-     Factory(registry={'sheep': FactoryRegistryEntry(cls=<class '__main__.Sheep'>, dict_constructor=None), 'lamb': FactoryRegistryEntry(cls=<class '__main__.Lamb'>, dict_constructor=None), 'mouton': FactoryRegistryEntry(cls=<class '__main__.Sheep'>, dict_constructor=None)})
-
-* if ``allow_id_overwrite`` is ``True``, registering a type with an existing ID
-  will succeed and overwrite the existing entry (the default value is ``False``).
-
-Finally, :meth:`~.Factory.register` features an optional ``dict_constructor``
+The :meth:`~.Factory.register` method features an optional ``dict_constructor``
 argument which, when set, associates a class method constructor to be called
 upon attempting dictionary conversion. See `Convert objects`_ for more detail.
+
+Alias registered types
+^^^^^^^^^^^^^^^^^^^^^^
+
+Having multiple IDs pointing to the same registered type may be useful as well.
+Types can be aliased after registration using the :meth:`~.Factory.alias`
+method:
+
+.. doctest::
+
+   >>> factory.alias("sheep", "mouton")
+   >>> factory
+   Factory(registry={'sheep': FactoryRegistryEntry(cls=<class '__main__.Sheep'>, dict_constructor=None), 'lamb': FactoryRegistryEntry(cls=<class '__main__.Lamb'>, dict_constructor=None), 'mouton': FactoryRegistryEntry(cls=<class '__main__.Sheep'>, dict_constructor=None)})
+
+Aliases may also be created using :meth:`~.Factory.register`'s ``aliases``
+keyword argument.
+
+.. doctest::
+
+   >>> del factory.registry["sheep"]
+   >>> del factory.registry["mouton"]
+   >>> factory.register(Sheep, type_id="sheep", aliases=["mouton"])
+   <class '__main__.Sheep'>
+   >>> factory
+   Factory(registry={'lamb': FactoryRegistryEntry(cls=<class '__main__.Lamb'>, dict_constructor=None), 'sheep': FactoryRegistryEntry(cls=<class '__main__.Sheep'>, dict_constructor=None), 'mouton': FactoryRegistryEntry(cls=<class '__main__.Sheep'>, dict_constructor=None)})
 
 Instantiate registered types
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^

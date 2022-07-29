@@ -154,8 +154,8 @@ class Factory:
         cls: Union[Type, LazyType, str],
         type_id: Optional[str] = None,
         dict_constructor: Optional[str] = None,
-        allow_aliases: bool = False,
-        allow_id_overwrite: bool = False,
+        aliases: Optional[List[str]] = None,
+        overwrite_id: bool = False,
         allow_lazy: bool = True,
     ) -> Any:
         if isinstance(cls, str):
@@ -176,11 +176,11 @@ class Factory:
 
         # Check if type is already registered
         cls_fullname = _fullname(cls)
-        if not allow_aliases and cls_fullname in self.registered_types:
+        if not aliases and cls_fullname in self.registered_types:
             raise ValueError(f"'{cls_fullname}' is already registered")
 
         # Check if ID is already used
-        if not allow_id_overwrite and type_id in self.registry.keys():
+        if not overwrite_id and type_id in self.registry.keys():
             raise ValueError(
                 f"'{type_id}' is already used to reference "
                 f"'{_fullname(self.registry[type_id].cls)}'"
@@ -201,6 +201,13 @@ class Factory:
             dict_constructor=dict_constructor,
         )
 
+        # Add aliases
+        if aliases is None:
+            aliases = []
+
+        for alias_id in aliases:
+            self.alias(type_id, alias_id)
+
         return cls
 
     def register(
@@ -209,8 +216,8 @@ class Factory:
         *,
         type_id: Optional[str] = None,
         dict_constructor: Optional[str] = None,
-        allow_aliases: bool = False,
-        allow_id_overwrite: bool = False,
+        aliases: Optional[List[str]] = None,
+        overwrite_id: bool = False,
         allow_lazy: bool = True,
     ) -> Any:
         """
@@ -235,11 +242,11 @@ class Factory:
             Class method to be used for dictionary-based construction. If
             ``None``, the default constructor is used.
 
-        :param allow_aliases:
+        :param aliases:
             If ``True``, a given type can be registered multiple times under
             different IDs.
 
-        :param allow_id_overwrite:
+        :param overwrite_id:
             If ``True``, existing IDs can be overwritten.
 
         :param allow_lazy:
@@ -261,6 +268,10 @@ class Factory:
         .. versionchanged:: 22.1.0
            Added ``allow_lazy`` argument. Accept :class:`LazyType` and strings
            for ``cls``.
+
+        .. versionchanged:: 22.2.0
+           Renamed ``allow_id_overwrite`` to ``overwrite_id``.
+           Removed ``allow_aliases``, replaced by ``aliases``.
         """
 
         if cls is not _MISSING:
@@ -269,8 +280,8 @@ class Factory:
                     cls,
                     type_id=type_id,
                     dict_constructor=dict_constructor,
-                    allow_aliases=allow_aliases,
-                    allow_id_overwrite=allow_id_overwrite,
+                    aliases=aliases,
+                    overwrite_id=overwrite_id,
                     allow_lazy=allow_lazy,
                 )
             except ValueError:
@@ -283,11 +294,39 @@ class Factory:
                     wrapped_cls,
                     type_id=type_id,
                     dict_constructor=dict_constructor,
-                    allow_aliases=allow_aliases,
-                    allow_id_overwrite=allow_id_overwrite,
+                    aliases=aliases,
+                    overwrite_id=overwrite_id,
                 )
 
             return inner_wrapper
+
+    def alias(self, type_id: str, alias_id: str, overwrite_id: bool = False) -> None:
+        """
+        Register a new alias to a registered type.
+
+        :param type_id:
+            ID of the aliased type.
+
+        :param alias_id:
+            Created alias ID.
+
+        :raises ValueError:
+
+
+        .. versionadded:: 22.2.0
+        """
+        if type_id in self.registry:
+            if not overwrite_id and alias_id in self.registry.keys():
+                raise ValueError(
+                    f"'{type_id}' is already used to reference "
+                    f"'{_fullname(self.registry[type_id].cls)}'"
+                )
+
+            else:
+                self.registry[alias_id] = self.registry[type_id]
+
+        else:
+            raise ValueError(f"cannot alias unregistered type '{type_id}'")
 
     def get_type(self, type_id: str) -> Type:
         """
