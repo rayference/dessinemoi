@@ -16,8 +16,8 @@ Dessine-moi
 .. image:: https://img.shields.io/conda/v/eradiate/dessinemoi?color=blue&style=flat-square
    :target: https://anaconda.org/eradiate/dessinemoi
 
-.. image:: https://img.shields.io/github/workflow/status/leroyvn/dessinemoi/Tests/main?style=flat-square
-   :target: https://github.com/leroyvn/dessinemoi/actions/workflows/tests.yml
+.. image:: https://img.shields.io/github/actions/workflow/status/leroyvn/dessinemoi/ci.yml?branch=main&style=flat-square
+   :target: https://github.com/leroyvn/dessinemoi/actions/workflows/ci.yml
 
 .. image:: https://img.shields.io/readthedocs/dessinemoi?style=flat-square
    :target: https://dessinemoi.readthedocs.io
