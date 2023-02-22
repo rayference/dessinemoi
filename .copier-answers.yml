@@ -1,6 +1,6 @@
 
 # Changes here will be overwritten by Copier
-_commit: 0.7.2
+_commit: 0.9.1
 _src_path: gh:leroyvn/copier-pdm
 author_email: vincent.leroy@rayference.eu
 author_fullname: Vincent Leroy
@@ -9,7 +9,7 @@ copyright_date: '2022'
 copyright_holder: Vincent Leroy
 copyright_holder_email: vincent.leroy@rayference.eu
 copyright_license: MIT
-docs_sphinx: true
+docs_sphinx: false
 project_description: A simple factory implementation written in Python
 project_name: Dessine-moi
 python_conda_env_name: dessinemoi
