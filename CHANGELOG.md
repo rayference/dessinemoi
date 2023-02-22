@@ -2,7 +2,7 @@
 
 [![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue?style=flat-square)](https://calver.org/)
 
-## Dessine-moi 22.2.0 (2022-07-29)
+## Dessine-moi 23.1.0 (2023-02-22)
 
 - Drop support for Python 3.7, add support for Python 3.11 ({ghpr}`7`).
 
@@ -12,7 +12,7 @@
 
 - `LazyType.convert()`: Resolve lazy types ({ghpr}`5`).
 - `Factory`: New alias system ({ghpr}`6`).
-- `Factory.register()`: Rename `allow_id_overwrite` to `overwrite_id` ({ghpr}``6).
+- `Factory.register()`: Rename `allow_id_overwrite` to `overwrite_id` ({ghpr}`6`).
 
 ## Dessine-moi 22.1.1 (2022-07-28)
 
