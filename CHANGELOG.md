@@ -4,6 +4,10 @@
 
 ## Dessine-moi 22.2.0 (2022-07-29)
 
+- Drop support for Python 3.7, add support for Python 3.11 ({ghpr}`7`).
+
+## Dessine-moi 22.2.0 (2022-07-29)
+
 ## Fixes and improvements
 
 - `LazyType.convert()`: Resolve lazy types ({ghpr}`5`).
