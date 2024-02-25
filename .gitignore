@@ -12,7 +12,6 @@ __pycache__/
 # Distribution / packaging
 build/
 dist/
-*.egg-info/
 
 # Unit test / coverage reports
 reports/
@@ -27,7 +26,6 @@ docs/_build/
 .ipynb_checkpoints/
 
 # Local settings and contents
-.pdm.toml
 __pypackages__/
 .venv/
 .pyenv-versions

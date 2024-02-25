@@ -1,101 +1,69 @@
 [build-system]
-requires = ["pdm-pep517"]
-build-backend = "pdm.pep517.api"
+build-backend = "hatchling.build"
+requires = ["hatchling"]
 
 [project]
-name = "dessinemoi"
-description = "A simple factory implementation written in Python"
 authors = [{name = "Vincent Leroy", email = "vincent.leroy@rayference.eu"}]
-license = {file = "LICENSE"}
-readme = "README.md"
-requires-python = ">=3.8"
-keywords = []
-dynamic = ["version"]
 classifiers = [
-    "Development Status :: 3 - Alpha"
+  "Development Status :: 6 - Mature",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12"
 ]
 dependencies = [
-  "attrs>=21",
+  "attrs>=21"
 ]
-
-[project.optional-dependencies]
+description = "A simple factory implementation written in Python"
+keywords = []
+license = {file = "LICENSE"}
+name = "dessinemoi"
+readme = "README.md"
+requires-python = ">=3.8"
+version = "24.1.0.dev"
 
 [project.urls]
-Homepage = "https://github.com/leroyvn/dessinemoi"
+Changelog = "https://github.com/rayference/dessinemoi/blob/main/CHANGELOG.md"
 Documentation = "https://dessinemoi.readthedocs.io"
-Changelog = "https://github.com/leroyvn/dessinemoi/blob/main/CHANGELOG.md"
-Repository = "https://github.com/leroyvn/dessinemoi"
-Issues = "https://github.com/leroyvn/dessinemoi/issues"
-
-[tool.pdm]
-version = {use_scm = true}
-package-dir = "src"
-
-[tool.pdm.dev-dependencies]
-docs = [
-    "sphinx>=4.0",
-    "sphinx-autobuild>=2021.3",
-    "sphinx-autodoc-typehints>=1.18",
-    "furo>=2021.11",
-    "myst-parser>=0.16",
-    "sphinx-copybutton>=0.4",
-]
-format = [
-    "autoflake>=1.4",
-    "black>=22.1",
-    "isort>=5.10",
-]
-maintain = []
-quality = []
-security = []
-tests = [
-    "pytest>=6.2",
-    "pytest-xdist>=2.4",
-    "pytest-cov>=3.0",
-    "xdoctest>=0.15.0",
-]
-typing = []
-
-[tool.black]
-line-length = 88
-
-[tool.isort]
-line_length = 88
-profile = "black"
-
-[tool.conda-lock]
-channels = ["conda-forge", "defaults"]
-
-[tool.conda-lock.dependencies]
-pip = "*"
-
-[tool.coverage.run]
-branch = true
-parallel = true
-source = [
-  "src/",
-]
-
-[tool.coverage.paths]
-equivalent = [
-  "src/",
-  "__pypackages__/",
-]
-
-[tool.coverage.report]
-show_missing = true
-skip_covered = true
-omit = [
-  "src/*/__init__.py",
-  "src/*/_version.py",
-]
-precision = 2
+Homepage = "https://github.com/rayference/dessinemoi"
+Issues = "https://github.com/rayference/dessinemoi/issues"
+Repository = "https://github.com/rayference/dessinemoi"
 
 [tool.coverage.html]
 directory = "./reports/coverage/html"
 
 [tool.coverage.json]
 output = "./reports/coverage/coverage.json"
+
+[tool.coverage.paths]
+equivalent = [
+  "src/",
+  "__pypackages__/"
+]
+
+[tool.coverage.report]
+omit = [
+  "src/*/__init__.py",
+  "src/*/_version.py"
+]
+precision = 2
+show_missing = true
+skip_covered = true
+
+[tool.coverage.run]
+branch = true
+parallel = true
+source = [
+  "src/"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/dessinemoi"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [tool.pytest.ini_options]
 addopts = "--doctest-glob='*.rst'"
@@ -104,14 +72,29 @@ norecursedirs = [
   ".env",
   "dist",
   "build",
-  "__pypackages__",
+  "__pypackages__"
 ]
 python_files = [
   "test_*.py",
   "*_test.py",
-  "tests.py",
+  "tests.py"
 ]
 testpaths = [
   "docs",
-  "tests",
+  "tests"
 ]
+
+[tool.rye]
+dev-dependencies = [
+  "furo>=2021.11",
+  "myst-parser>=0.16",
+  "pytest>=6.2",
+  "pytest-xdist>=2.4",
+  "pytest-cov>=3.0",
+  "sphinx>=4.0",
+  "sphinx-autobuild>=2021.3",
+  "sphinx-autodoc-typehints>=1.18",
+  "sphinx-copybutton>=0.4",
+  "xdoctest>=0.15.0"
+]
+managed = true
