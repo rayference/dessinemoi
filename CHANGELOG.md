@@ -2,6 +2,19 @@
 
 [![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue)](https://calver.org/)
 
+
+## Dessine-moi 24.1.0 (2024-02-25)
+
+- Add Python 3.12 support ({ghpr}`8`).
+
+### Developer-side changes
+
+- Move from PDM to Rye for project management ({ghpr}`8`).
+- Drop Nox for testing ({ghpr}`8`).
+- Drop Conda development environment support ({ghpr}`8`).
+- Use the Ruff formatter instead of Black in pre-commit hooks ({ghpr}`8`).
+- Drop Copier template ({ghpr}`8`).
+
 ## Dessine-moi 23.1.0 (2023-02-22)
 
 - Drop support for Python 3.7, add support for Python 3.11 ({ghpr}`7`).
