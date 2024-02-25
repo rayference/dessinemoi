@@ -2,6 +2,7 @@
 
 [![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue)](https://calver.org/)
 
+## Dessine-moi 24.2.0 (upcoming release)
 
 ## Dessine-moi 24.1.0 (2024-02-25)
 
