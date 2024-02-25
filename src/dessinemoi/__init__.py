@@ -2,11 +2,11 @@ from typing import Any
 
 # -- Version information -------------------------------------------------------
 
-from ._version import version as __version__  #: isort: skip
+from ._version import version as __version__  # noqa: F401
 
 # -- Public API ----------------------------------------------------------------
 
-from ._core import Factory, FactoryRegistryEntry, LazyType  #: isort: skip
+from ._core import Factory, FactoryRegistryEntry, LazyType  # noqa: F401
 
 # -- API to built-in factory instance ------------------------------------------
 
