@@ -26,7 +26,7 @@ born from the need to create dynamically object trees from nested dictionaries
 - Use dictionaries to create objects from the factory
 - Create `attrs`-compatible converters to automatically convert dictionaries to
   instances of registered types
-- Customise factories to your needs
+- Customize factories to your needs
 
 Check the [documentation](https://dessinemoi.readthedocs.io) for more detail.
 

@@ -74,7 +74,7 @@ class LazyType:
     @classmethod
     def from_str(cls, value: str) -> LazyType:
         """
-        Initialise a :class:`LazyType` from a string representing its fully
+        Initialize a :class:`LazyType` from a string representing its fully
         qualified name.
 
         :param value:
