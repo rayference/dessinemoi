@@ -4,26 +4,27 @@
 
 The narrator of Antoine de Saint-Exupéry's Little Prince probably dreamt of a factory like this one...
 
-[![PyPI version](https://img.shields.io/pypi/v/dessinemoi?color=blue&style=flat-square)](https://pypi.org/project/dessinemoi)
-[![Conda version](https://img.shields.io/conda/v/eradiate/dessinemoi?color=blue&style=flat-square)](https://anaconda.org/eradiate/dessinemoi)
+[![PyPI version](https://img.shields.io/pypi/v/dessinemoi?color=blue)](https://pypi.org/project/dessinemoi)
+[![Conda version](https://img.shields.io/conda/v/eradiate/dessinemoi?color=blue)](https://anaconda.org/eradiate/dessinemoi)
 
-[![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/leroyvn/dessinemoi/ci.yml?branch=main&style=flat-square)](https://github.com/leroyvn/dessinemoi/actions/workflows/ci.yml)
-[![Documentation Status](https://img.shields.io/readthedocs/dessinemoi?style=flat-square)](https://dessinemoi.readthedocs.io)
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/leroyvn/dessinemoi/ci.yml?branch=main)](https://github.com/leroyvn/dessinemoi/actions/workflows/ci.yml)
+[![Documentation Status](https://img.shields.io/readthedocs/dessinemoi)](https://dessinemoi.readthedocs.io)
 
-[![Code style: black](https://img.shields.io/badge/code%20style-black-black?style=flat-square)](https://black.readthedocs.io)
-[![Imports: isort](https://img.shields.io/badge/%20imports-isort-blue?style=flat-square&labelColor=orange)](https://pycqa.github.io/isort)
+[![Rye](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/mitsuhiko/rye/main/artwork/badge.json)](https://rye-up.com)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-black?style)](https://black.readthedocs.io)
 
 ## Motivation
 
-*Dessine-moi* is a simple Python implementation of the factory pattern. It was 
-born from the need to create dynamically object trees from nested dictionaries 
+*Dessine-moi* is a simple Python implementation of the factory pattern. It was
+born from the need to create dynamically object trees from nested dictionaries
 (*e.g.* a JSON document).
 
 ## Features
 
 - Create a `Factory` object and register types to it
 - Use dictionaries to create objects from the factory
-- Create `attrs`-compatible converters to automatically convert dictionaries to 
+- Create `attrs`-compatible converters to automatically convert dictionaries to
   instances of registered types
 - Customise factories to your needs
 

@@ -1,6 +1,6 @@
 # What's new?
 
-[![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue?style=flat-square)](https://calver.org/)
+[![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue)](https://calver.org/)
 
 ## Dessine-moi 23.1.0 (2023-02-22)
 
