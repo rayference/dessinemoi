@@ -5,7 +5,7 @@
 The narrator of Antoine de Saint-Exupéry's Little Prince probably dreamt of a factory like this one...
 
 [![PyPI version](https://img.shields.io/pypi/v/dessinemoi?color=blue)](https://pypi.org/project/dessinemoi)
-[![Conda version](https://img.shields.io/conda/v/eradiate/dessinemoi?color=blue)](https://anaconda.org/eradiate/dessinemoi)
+[![Conda version](https://img.shields.io/conda/v/conda-forge/dessinemoi?color=blue)](https://anaconda.org/conda-forge/dessinemoi)
 
 [![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/leroyvn/dessinemoi/ci.yml?branch=main)](https://github.com/leroyvn/dessinemoi/actions/workflows/ci.yml)
 [![Documentation Status](https://img.shields.io/readthedocs/dessinemoi)](https://dessinemoi.readthedocs.io)

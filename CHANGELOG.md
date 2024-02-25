@@ -4,6 +4,8 @@
 
 ## Dessine-moi 24.2.0 (upcoming release)
 
+- *Dessine-moi* is now on conda-forge.
+
 ## Dessine-moi 24.1.0 (2024-02-25)
 
 - Add Python 3.12 support ({ghpr}`8`).

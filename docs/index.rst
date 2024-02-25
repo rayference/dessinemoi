@@ -13,8 +13,8 @@ Dessine-moi
 .. image:: https://img.shields.io/pypi/v/dessinemoi?color=blue
    :target: https://pypi.org/project/dessinemoi
 
-.. image:: https://img.shields.io/conda/v/eradiate/dessinemoi?color=blue
-   :target: https://anaconda.org/eradiate/dessinemoi
+.. image:: https://img.shields.io/conda/v/conda-forge/dessinemoi?color=blue
+   :target: https://anaconda.org/conda-forge/dessinemoi
 
 .. image:: https://img.shields.io/github/actions/workflow/status/leroyvn/dessinemoi/ci.yml?branch=main
    :target: https://github.com/leroyvn/dessinemoi/actions/workflows/ci.yml
@@ -67,7 +67,7 @@ Using Conda:
 
 .. code-block:: bash
 
-   conda install -c eradiate dessinemoi
+   conda install -c conda-forge dessinemoi
 
 The :ref:`usage` section presents *Dessine-moi*'s features and how to use them.
 
