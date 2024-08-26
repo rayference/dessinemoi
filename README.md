@@ -2,7 +2,8 @@
 
 > S'il vous plaît, dessine-moi un mouton.
 
-The narrator of Antoine de Saint-Exupéry's Little Prince probably dreamt of a factory like this one...
+The narrator of Antoine de Saint-Exupéry's Little Prince probably dreamt of a
+factory like this one...
 
 [![PyPI version](https://img.shields.io/pypi/v/dessinemoi?color=blue)](https://pypi.org/project/dessinemoi)
 [![Conda version](https://img.shields.io/conda/v/conda-forge/dessinemoi?color=blue)](https://anaconda.org/conda-forge/dessinemoi)
@@ -24,7 +25,7 @@ born from the need to create dynamically object trees from nested dictionaries
 
 - Create a `Factory` object and register types to it
 - Use dictionaries to create objects from the factory
-- Create `attrs`-compatible converters to automatically convert dictionaries to
+- Create *attrs*-compatible converters to automatically convert dictionaries to
   instances of registered types
 - Customize factories to your needs
 

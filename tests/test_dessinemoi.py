@@ -124,7 +124,6 @@ def test_factory_lazy(factory):
     assert isinstance(factory.create("lazy"), LazyTypeTest)
 
     # Lazy types require an ID
-    aliases = (True,)
     with pytest.raises(ValueError):
         factory.register(
             f"{__name__}.LazyTypeTest",
@@ -272,7 +271,7 @@ def test_lazy_type():
     )
     # -- Absolute path with nested submodules
     assert dessinemoi.LazyType.from_str("foo.bar.baz") == dessinemoi.LazyType(
-        mod=f"foo.bar", attr="baz"
+        mod="foo.bar", attr="baz"
     )
     # -- Relative imports are not allowed
     with pytest.raises(ValueError):
