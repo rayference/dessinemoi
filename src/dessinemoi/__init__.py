@@ -1,12 +1,12 @@
-from typing import Any
-
-# -- Version information -------------------------------------------------------
-
-from ._version import version as __version__  # noqa: F401
+from typing import Any  # noqa: I001
 
 # -- Public API ----------------------------------------------------------------
 
-from ._core import Factory, FactoryRegistryEntry, LazyType  # noqa: F401
+from ._core import Factory, FactoryRegistryEntry, LazyType
+
+# -- Version information -------------------------------------------------------
+
+from ._version import version as __version__
 
 # -- API to built-in factory instance ------------------------------------------
 
@@ -26,6 +26,7 @@ def __getattr__(name: str) -> Any:
 
 
 __all__ = [
+    "__version__",
     "Factory",
     "FactoryRegistryEntry",
     "LazyType",

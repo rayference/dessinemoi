@@ -84,6 +84,12 @@ testpaths = [
   "tests"
 ]
 
+[tool.ruff.lint]
+select = ["I", "E", "F"]
+
+[tool.ruff.lint.isort]
+relative-imports-order = "closest-to-furthest"
+
 [tool.rye]
 dev-dependencies = [
   "furo>=2021.11",
