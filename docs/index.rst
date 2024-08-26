@@ -16,8 +16,8 @@ Dessine-moi
 .. image:: https://img.shields.io/conda/v/conda-forge/dessinemoi?color=blue
    :target: https://anaconda.org/conda-forge/dessinemoi
 
-.. image:: https://img.shields.io/github/actions/workflow/status/leroyvn/dessinemoi/ci.yml?branch=main
-   :target: https://github.com/leroyvn/dessinemoi/actions/workflows/ci.yml
+.. image:: https://img.shields.io/github/actions/workflow/status/rayference/dessinemoi/ci.yml?branch=main
+   :target: https://github.com/rayference/dessinemoi/actions/workflows/ci.yml
 
 .. image:: https://img.shields.io/readthedocs/dessinemoi
    :target: https://dessinemoi.readthedocs.io
@@ -106,4 +106,4 @@ The development is supported by `Rayference <https://www.rayference.eu>`_.
    :hidden:
 
    src/contributing.md
-   GitHub repository <https://github.com/leroyvn/dessinemoi>
+   GitHub repository <https://github.com/rayference/dessinemoi>

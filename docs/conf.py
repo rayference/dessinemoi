@@ -31,7 +31,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # https://www.sphinx-doc.org/en/master/usage/extensions/extlinks.html
 
 ghbase = "https://github.com"
-ghroot = f"{ghbase}/leroyvn/dessinemoi"
+ghroot = f"{ghbase}/rayference/dessinemoi"
 extlinks = {
     "ghissue": (f"{ghroot}/issues/%s", "GH%s"),
     "ghpr": (f"{ghroot}/pull/%s", "PR%s"),
