@@ -310,8 +310,14 @@ class Factory:
         :param alias_id:
             Created alias ID.
 
-        :raises ValueError:
+        :param overwrite_id:
+            If ``True`` and ``alias_id`` is already registered, the existing
+            alias is redefined; else, a :class:`.ValueError` is raised.
 
+        :raises ValueError:
+            If the new alias cannot be registered, either because the target
+            type is not registered, or because the alias exists and is protected
+            against overwrites.
 
         .. versionadded:: 22.2.0
         """

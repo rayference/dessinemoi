@@ -1,8 +1,3 @@
-.. dessinemoi documentation master file, created by
-   sphinx-quickstart on Tue May 25 18:21:12 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 :hide-toc:
 
 Dessine-moi
@@ -22,16 +17,13 @@ Dessine-moi
 .. image:: https://img.shields.io/readthedocs/dessinemoi
    :target: https://dessinemoi.readthedocs.io
 
-.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/mitsuhiko/rye/main/artwork/badge.json
-    :target: https://rye-up.com
+.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/rye/main/artwork/badge.json
+    :target: https://rye.astral.sh
     :alt: Rye
 
 .. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
     :target: https://github.com/astral-sh/ruff
     :alt: Ruff
-
-.. image:: https://img.shields.io/badge/code%20style-black-black
-   :target: https://github.com/psf/black
 
 *S'il vous plaît, dessine-moi un mouton.*
 
@@ -45,16 +37,16 @@ born from the need to create dynamically object trees from nested dictionaries
 Features
 --------
 
-- Create a ``Factory`` object and register types to it.
+- Create a :class:`.Factory` object and register types to it.
 - Use dictionaries to create objects from the factory.
-- Create ``attrs``-compatible converters to automatically convert dictionaries
+- Create *attrs*-compatible converters to automatically convert dictionaries
   to instances of registered types.
 - Customise factories to your needs.
 
 Getting started
 ---------------
 
-*Dessine-moi* requires Python 3.8+ and depends on ``attrs``. It is tested with
+*Dessine-moi* requires Python 3.8+ and depends on *attrs*. It is tested with
 Pytest.
 
 Install from PyPI in your virtual environment:

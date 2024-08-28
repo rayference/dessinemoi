@@ -26,7 +26,7 @@ strings, to Python types. Our factory has currently an empty registry:
 Register types to the factory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's define a new Python type. For convenience, we will work with the ``attrs``
+Let's define a new Python type. For convenience, we will work with the *attrs*
 library, but *Dessine-moi* does not require you to use it. Let's define a simple
 class:
 
@@ -102,9 +102,9 @@ keyword argument.
 Instantiate registered types
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once a type is registered, it can be instantiated using the :meth:`~.Factory.new`
-method. If constructed class's constructor expects arguments, the ``args`` and
-``kwargs`` arguments will forward them appropriately:
+Once a type is registered, it can be instantiated using the
+:meth:`~.Factory.create` method. If the constructed class's constructor expects
+arguments, the ``args`` and ``kwargs`` arguments will forward them appropriately:
 
 .. doctest::
 
@@ -162,13 +162,13 @@ Convert objects
 ^^^^^^^^^^^^^^^
 
 *Dessine-moi*'s factories implement converters which can be used as part of the
-``attrs`` conversion step. In its most straightforward form, the
+*attrs* conversion step. In its most straightforward form, the
 :meth:`~.Factory.convert` method operates on a ``value`` argument.
 
 * If ``value`` is not a dictionary, :meth:`~.Factory.convert` returns it
   unchanged.
 * If ``value`` is a dictionary, :meth:`~.Factory.convert` queries its ``type``
-  entry for a type ID and uses it to call :meth:`~.Factory.new`.
+  entry for a type ID and uses it to call :meth:`~.Factory.create`.
 
   .. doctest::
 
@@ -179,7 +179,7 @@ Convert objects
    :class: note
 
    * :meth:`~.Factory.convert` takes a ``allowed_cls`` argument and uses it
-     exactly as :meth:`~.Factory.new` does.
+     exactly as :meth:`~.Factory.create` does.
    * Dictionary conversion won't work with classes expected non kw-only fields.
    * If a ``dict_constructor`` is associated to the registered type, it will be
      used to create the object instead of the default constructor.
@@ -232,7 +232,7 @@ simply referenced by a :class:`.LazyType` instance.
    >>> factory.registry
    {'datetime': FactoryRegistryEntry(cls=LazyType(mod='datetime', attr='datetime'), dict_constructor=None)}
 
-If we call :meth:`Factory.create`, the target type is imported and returned:
+If we call :meth:`.Factory.create`, the target type is imported and returned:
 
 .. doctest::
 
