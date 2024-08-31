@@ -90,7 +90,7 @@ The development is supported by `Rayference <https://www.rayference.eu>`_.
    :caption: Reference
 
    rst/api
-   src/whats_new.md
+   src/release_notes.md
 
 
 .. toctree::

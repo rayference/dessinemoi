@@ -1,10 +1,11 @@
-# What's new?
+# Release Notes
 
 [![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue)](https://calver.org/)
 
 ## Dessine-moi 24.2.0 (upcoming release)
 
 - *Dessine-moi* is now on conda-forge.
+- The "What's New?" page is now entitled "Release Notes".
 
 ## Dessine-moi 24.1.0 (2024-02-25)
 
