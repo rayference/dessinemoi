@@ -83,19 +83,19 @@ The development is supported by `Rayference <https://www.rayference.eu>`_.
    :hidden:
    :caption: Use
 
-   rst/usage
+   usage
 
 .. toctree::
    :hidden:
    :caption: Reference
 
-   rst/api
-   src/release_notes.md
+   api
+   release_notes.md
 
 
 .. toctree::
    :caption: Develop
    :hidden:
 
-   src/contributing.md
+   contributing.md
    GitHub repository <https://github.com/rayference/dessinemoi>
