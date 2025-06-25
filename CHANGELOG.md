@@ -2,10 +2,15 @@
 
 [![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue)](https://calver.org/)
 
-## Dessine-moi 24.2.0 (upcoming release)
+## Dessine-moi 25.1.0 (upcoming release)
 
 - *Dessine-moi* is now on conda-forge.
 - The "What's New?" page is now entitled "Release Notes".
+- Add Python 3.13 support ({ghpr}`11`).
+
+### Developer-side changes
+
+- Migrate from Rye to uv for project management ({ghpr}`11`).
 
 ## Dessine-moi 24.1.0 (2024-02-25)
 
@@ -29,7 +34,8 @@
 
 - `LazyType.convert()`: Resolve lazy types ({ghpr}`5`).
 - `Factory`: New alias system ({ghpr}`6`).
-- `Factory.register()`: Rename `allow_id_overwrite` to `overwrite_id` ({ghpr}`6`).
+- `Factory.register()`: Rename `allow_id_overwrite` to `overwrite_id` ({ghpr}
+  `6`).
 
 ## Dessine-moi 22.1.1 (2022-07-28)
 
