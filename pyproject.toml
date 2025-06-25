@@ -21,7 +21,7 @@ license = { file = "LICENSE" }
 name = "dessinemoi"
 readme = "README.md"
 requires-python = ">=3.8"
-version = "25.1.0"
+version = "25.2.0.dev0"
 
 [project.urls]
 Changelog = "https://github.com/rayference/dessinemoi/blob/main/CHANGELOG.md"

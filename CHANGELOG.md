@@ -2,6 +2,8 @@
 
 [![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue)](https://calver.org/)
 
+## Dessine-moi 25.2.0 (*upcoming release*)
+
 ## Dessine-moi 25.1.0 (2025-06-25)
 
 - *Dessine-moi* is now on conda-forge.

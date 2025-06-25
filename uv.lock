@@ -404,7 +404,7 @@ toml = [
 
 [[package]]
 name = "dessinemoi"
-version = "25.1.0"
+version = "25.2.0.dev0"
 source = { editable = "." }
 dependencies = [
     { name = "attrs" },
