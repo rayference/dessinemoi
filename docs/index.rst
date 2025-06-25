@@ -17,9 +17,9 @@ Dessine-moi
 .. image:: https://img.shields.io/readthedocs/dessinemoi
    :target: https://dessinemoi.readthedocs.io
 
-.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/rye/main/artwork/badge.json
-    :target: https://rye.astral.sh
-    :alt: Rye
+.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json
+    :target: https://github.com/astral-sh/uv
+    :alt: uv
 
 .. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
     :target: https://github.com/astral-sh/ruff
