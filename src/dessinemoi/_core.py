@@ -140,6 +140,8 @@ class Factory:
        ``Dict[str, FactoryRegistryEntry]``.
     """
 
+    _registered_types: Optional[List[str]] = attrs.field(default=None, repr=False)
+
     @property
     def registered_types(self) -> List[str]:
         """
@@ -147,7 +149,11 @@ class Factory:
 
         .. versionadded:: 21.3.0
         """
-        return list({_fullname(x.cls) for x in self.registry.values()})
+        if self._registered_types is None:
+            self._registered_types = list(
+                {_fullname(x.cls) for x in self.registry.values()}
+            )
+        return self._registered_types
 
     def _register_impl(
         self,
@@ -160,6 +166,9 @@ class Factory:
     ) -> Any:
         if isinstance(cls, str):
             cls = LazyType.from_str(cls)
+
+        # Invalidate registered type cache
+        self._registered_types = None
 
         # Upon request, force eager loading of lazy type declarations
         if isinstance(cls, LazyType) and not allow_lazy:

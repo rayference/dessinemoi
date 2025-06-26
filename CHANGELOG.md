@@ -4,6 +4,8 @@
 
 ## Dessine-moi 25.2.0 (*upcoming release*)
 
+- Cache registered type list ({ghpr}`12`).
+
 ## Dessine-moi 25.1.0 (2025-06-25)
 
 - *Dessine-moi* is now on conda-forge.
