@@ -13,6 +13,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
 dependencies = ["attrs>=21"]
 description = "A simple factory implementation written in Python"
@@ -21,7 +22,7 @@ license = { file = "LICENSE" }
 name = "dessinemoi"
 readme = "README.md"
 requires-python = ">=3.8"
-version = "25.2.0.dev0"
+version = "26.1.0.dev0"
 
 [project.urls]
 Changelog = "https://github.com/rayference/dessinemoi/blob/main/CHANGELOG.md"
