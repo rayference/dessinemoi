@@ -2,7 +2,7 @@
 
 [![CalVer](https://img.shields.io/badge/calver-YY.MINOR.MICRO-blue)](https://calver.org/)
 
-## Dessine-moi 26.1.0 (*upcoming release*)
+## Dessine-moi 26.1.0 (2026-03-02)
 
 - Add Python 3.14 support ({ghpr}`24`).
 
